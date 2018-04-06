@@ -12,7 +12,7 @@ const pagesRoutes: Routes = [
         children:[
             { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
             { path: 'dashboard', component: DashboardComponent },
-            { path: 'progess', component: ProgressComponent },
+            { path: 'progress', component: ProgressComponent },
             { path: 'graficas1', component: Graficas1Component }
         ]
     }
