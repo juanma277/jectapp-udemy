@@ -32,11 +32,13 @@
 
     <div class="col-lg-5">
         <div class="card">
-            <div class="card-body">
+            <div class="card-body" align="center">
                 <h4 class="card-title">Imagen de Usuario</h4>
                 <h6 class="card-subtitle">Espacio para editar la imagen del perfil</h6>
 
-                <img src="">
+                <img *ngIf="!imagenTemporal" [src]="usuario.img | imagen" class="w150">
+                <img *ngIf="imagenTemporal" [src]="imagenTemporal" class="w150">
+
                 <input (change)="seleccionImage($event.target.files[0])" type="file">
                 <br>
                 <br>

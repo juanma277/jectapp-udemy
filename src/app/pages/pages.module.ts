@@ -14,6 +14,7 @@ import { PromesasComponent } from './promesas/promesas.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
 import { PipesModule } from "../pipes/pipes.module";
 import { ProfileComponent } from './profile/profile.component';
+import { CommonModule } from "@angular/common";
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { ProfileComponent } from './profile/profile.component';
         Graficas1Component
     ],
     imports:[
+        CommonModule,
         ShareModule,
         PAGES_ROUTES,
         FormsModule,
