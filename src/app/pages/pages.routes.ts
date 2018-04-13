@@ -10,6 +10,8 @@ import { RxjsComponent } from './rxjs/rxjs.component';
 import { LoginGuardGuard } from '../services/service.index';
 import { ProfileComponent } from './profile/profile.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
+import { VehiculosComponent } from './vehiculos/vehiculos.component';
+import { RutasComponent } from './rutas/rutas.component';
 
 
 const pagesRoutes: Routes = [
@@ -27,7 +29,12 @@ const pagesRoutes: Routes = [
             { path: 'promesas', component: PromesasComponent , data:{titulo: 'Promesas'}},
             { path: 'Rxjs', component: RxjsComponent , data:{titulo: 'Obsevables'}}, 
             //Mantenimiento
-            { path: 'usuarios', component: UsuariosComponent , data:{titulo: 'Mantenimiento de Usuarios'}}
+            { path: 'usuarios', component: UsuariosComponent , data:{titulo: 'Mantenimiento de Usuarios'}},
+            { path: 'vehiculos', component: VehiculosComponent , data:{titulo: 'Mantenimiento de Vehiculos'}},
+            { path: 'rutas', component: RutasComponent , data:{titulo: 'Mantenimiento de Rutas'}}
+            
+            
+
                                    
         ]
     }

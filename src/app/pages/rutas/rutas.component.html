@@ -1,0 +1,47 @@
+<div class="row animated bounceInUp">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <input #input (keyup)="buscarRuta(input.value)" type="text" class="form-control" placeholder="Buscar ruta ...">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <div class="text-right">
+                    <button type="button" class="btn waves-effect waves-light btn-rounded btn-primary">
+                    <i class="fa fa-plus"> Crear Ruta</i>
+                  </button>
+                </div>
+
+                <h3 class="card-title">Rutas registradas(<small>3</small>)</h3>
+
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Imagen</th>
+                            <th>Ruta</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><img src="" class="img-50 img-circle pointer"></td>
+                            <td>Nombre de la ruta</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+
+            </div>
+        </div>
+    </div>
+</div>

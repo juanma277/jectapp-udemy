@@ -17,6 +17,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { CommonModule } from "@angular/common";
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { ModalUploadComponent } from "../components/modal-upload/modal-upload.component";
+import { VehiculosComponent } from './vehiculos/vehiculos.component';
+import { RutasComponent } from './rutas/rutas.component';
 
 
 @NgModule({
@@ -32,7 +34,9 @@ import { ModalUploadComponent } from "../components/modal-upload/modal-upload.co
         RxjsComponent,
         ProfileComponent,
         UsuariosComponent,
-        ModalUploadComponent
+        ModalUploadComponent,
+        VehiculosComponent,
+        RutasComponent
     ],
     exports:[
         DashboardComponent,
