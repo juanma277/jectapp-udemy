@@ -20,7 +20,7 @@ import { SettingsService } from './services/service.index';
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
