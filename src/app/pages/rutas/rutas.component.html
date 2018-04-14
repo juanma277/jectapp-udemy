@@ -10,6 +10,18 @@
     </div>
 </div>
 
+<div class="row animated bounceInUp" *ngIf="cargando">
+    <div class="col-sm-12">
+        <div class="alert alert-warning text-center">
+            <strong>Cargando ...</strong>
+            <br>
+            <i class="fa fa-refresh fa-spin fa-2x"></i>
+            <br>
+            <span>Espere por favor</span>
+        </div>
+    </div>
+</div>
+
 <div class="row">
     <div class="col-12">
         <div class="card">
@@ -21,7 +33,7 @@
                   </button>
                 </div>
 
-                <h3 class="card-title">Rutas registradas(<small>3</small>)</h3>
+                <h3 class="card-title">Rutas registradas(<small>{{totalRegistros}}</small>)</h3>
 
                 <table class="table table-hover">
                     <thead>
@@ -32,13 +44,31 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td><img src="" class="img-50 img-circle pointer"></td>
-                            <td>Nombre de la ruta</td>
-                            <td></td>
+                        <tr *ngFor="let ruta of rutas">
+                            <td><img [src]="ruta.img | imagen:'rutas'" class="img-50 img-circle pointer"></td>
+                            <td>
+                                <input [(ngModel)]="ruta.nombre" name="nombre" type="text" required placeholder="Nombre de la ruta">
+                            </td>
+                            <td>
+                                <button (click)="guardarRuta(ruta)" class="btn btn-success">
+                                <i class="fa fa-save"></i>
+                              </button>
+
+                                <button (click)="borrarRuta(ruta)" class="btn btn-danger">
+                                  <i class="fa fa-trash-o"></i>
+                                </button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
+
+                <button (click)="cambiarDesde(-5)" class="btn btn-secondary">
+                        Anterior
+                </button>
+
+                <button (click)="cambiarDesde(5)" class="btn btn-secondary">
+                        Siguiente                    
+                </button>
 
 
             </div>

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Usuario } from '../../models/usuario.model';
 import { UsuarioService } from '../../services/service.index';
 import { ModalUploadService } from '../../components/modal-upload/modal-upload.service';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 declare var swal:any;
 
@@ -60,12 +59,11 @@ export class UsuariosComponent implements OnInit {
     this.cargando = true;
 
     this.usuarioService.buscarUsuario(termino)
-        .subscribe((usuarios:Usuario[])=>{
+        .subscribe((usuarios:any)=>{
           this.usuarios = usuarios;
           this.cargando = false;
           
         });
-
   }
 
   borrarUsuario(usuario: Usuario){

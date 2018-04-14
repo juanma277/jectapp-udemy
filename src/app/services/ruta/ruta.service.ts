@@ -6,27 +6,19 @@ import { Ruta } from '../../models/ruta.model';
 
 @Injectable()
 export class RutaService {
-
-  totalRutas: number = 0;
-  
+ 
   constructor(public http: HttpClient,
               public usuarioService: UsuarioService) { }
 
-  cargarRutas(){
-    let url = URL_SERVICIOS + '/ruta';
-    return this.http.get(url)
-               .map((resp:any) =>{
-                 this.totalRutas = resp.total;
-                 return resp.rutas;
-               }); 
-
+  cargarRutas(desde:number = 0){
+    let url = URL_SERVICIOS + '/ruta?desde='+desde;
+    return this.http.get(url);
   }
 
   obtenerRuta(id: string){
     let url = URL_SERVICIOS + '/ruta/'+id;
     return this.http.get(url)
                .map((resp:any) => resp.ruta);
-
   }
 
   borrarRuta(id: string){
@@ -35,7 +27,6 @@ export class RutaService {
 
     return this.http.delete(url)
                .map(resp => swal('Ruta Eliminada', 'Ruta elimada correctamente', 'success'));
-
   }
 
   crearRuta(nombre: string){
@@ -50,7 +41,6 @@ export class RutaService {
     let url = URL_SERVICIOS + '/busqueda/coleccion/rutas/'+termino;
     return this.http.get(url)
                 .map((resp:any)=> resp.rutas);
-
   }
 
   actualizarRuta(ruta: Ruta){
