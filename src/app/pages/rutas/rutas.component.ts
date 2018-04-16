@@ -38,8 +38,9 @@ export class RutasComponent implements OnInit {
   }
 
   guardarRuta(ruta: Ruta){
+    this.cargando = true;
     this.rutaService.actualizarRuta(ruta)
-        .subscribe(rutas => this.rutas = rutas);
+        .subscribe(()=> this.cargando = false);
   }
 
   borrarRuta(ruta: Ruta){
@@ -75,7 +76,10 @@ export class RutasComponent implements OnInit {
       }
 
       this.rutaService.crearRuta(valor)
-          .subscribe(()=> this.cargarRutas());
+          .subscribe(()=> {
+            swal('Ruta creada','La ruta '+valor+' ha sido creada', 'success');
+            this.cargarRutas();
+          });
     });
   }
 

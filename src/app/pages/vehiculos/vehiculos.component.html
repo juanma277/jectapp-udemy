@@ -28,16 +28,17 @@
             <div class="card-body">
 
                 <div class="text-right">
-                    <button (click)="crearVehiculo()" type="button" class="btn waves-effect waves-light btn-rounded btn-primary">
+                    <button [routerLink]="['/vehiculo','nuevo']" type="button" class="btn waves-effect waves-light btn-rounded btn-primary">
                   <i class="fa fa-plus"> Crear Vehiculo</i>
                 </button>
                 </div>
 
-                <h3 class="card-title">Vehiculos registradas(<small>{{totalRegistros}}</small>)</h3>
+                <h3 class="card-title">Vehiculos Registrados(<small>{{totalRegistros}}</small>)</h3>
 
                 <table class="table table-hover">
                     <thead>
                         <tr>
+                            <th></th>
                             <th>Imagen</th>
                             <th>Nombre</th>
                             <th>Ruta</th>
@@ -46,6 +47,7 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let vehiculo of vehiculos">
+                            <td>{{1-0}}</td>
                             <td><img (click)="actualizarImagen(vehiculo)" [src]="vehiculo.img | imagen:'vehiculos'" class="img-50 pointer"></td>
                             <td>
                                 {{vehiculo.nombre}}
@@ -54,7 +56,7 @@
                                 {{vehiculo.ruta.nombre}}
                             </td>
                             <td>
-                                <button (click)="editarVehiculo(vehiculo)" class="btn btn-success">
+                                <button [routerLink]="['/vehiculo',vehiculo._id ]" class="btn btn-success">
                               <i class="fa fa-edit"></i>
                             </button>
 

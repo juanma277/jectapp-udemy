@@ -26,7 +26,14 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <h3 class="card-title">Usuario Registrados (<small>{{totalRegistros}}</small>)</h3>
+
+                <div class="text-right">
+                    <button (click)="crearUsuario()" type="button" class="btn waves-effect waves-light btn-rounded btn-primary">
+                            <i class="fa fa-plus"> Crear Usuario</i>
+                          </button>
+                </div>
+
+                <h3 class="card-title">Usuarios Registrados (<small>{{totalRegistros}}</small>)</h3>
                 <table class="table table-hover">
                     <thead>
                         <tr>

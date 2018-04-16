@@ -50,7 +50,7 @@ export class RutaService {
     return this.http.put(url, ruta)
                .map((resp:any)=> {
                  swal('Ruta actualizada','La ruta '+ ruta.nombre + 'ha sido actualizado', 'success');
-                 return resp.ruta
+                 return true;
                 });
   }
 

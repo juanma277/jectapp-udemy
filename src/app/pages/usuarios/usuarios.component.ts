@@ -98,4 +98,8 @@ export class UsuariosComponent implements OnInit {
     this.modalUploadService.mostrarModal('Usuarios', id);
   }
 
+  crearUsuario(){
+    
+  }
+
 }

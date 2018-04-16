@@ -1,3 +1,60 @@
-<p>
-  vehiculo works!
-</p>
+<div class=row>
+    <div class="col-md-6">
+
+        <div class="card card-body">
+            <h3 class="box-title m-b-0">Vehiculo: XXX</h3>
+            <p class="text-muted m-b-30 font-13"> Espacio para editar los datos del vehiculo. </p>
+            <div class="row">
+                <div class="col-sm-12 col-xs-12">
+                    <form #f="ngForm" ngNativeValidate (ngSubmit)="guardarMedico(f)">
+                        <div class="form-group">
+                            <label>Nombre del vehiculo</label>
+                            <input type="text" class="form-control" placeholder="Nombre del vehiculo" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Ruta</label>
+                            <select name="" class="form-control" required>
+                              <option value="">Seleccione la Ruta</option>
+                              <option *ngFor="let ruta of rutas" [value]="ruta._id">
+                                {{ruta.nombre}}
+                              </option>
+                            </select>
+
+                        </div>
+
+                        <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">
+                          <i class="fa fa-save"></i>
+                          GUARDAR
+                        </button>
+                        <button routerLink="/vehiculos" class="btn btn-inverse waves-effect waves-light">
+                          CANCELAR
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class=col-md-3>
+        <div class="card card-body">
+            <h4 class="box-title m-b-0">Ruta</h4>
+
+            <img src="" alt="">
+
+        </div>
+
+    </div>
+
+    <div class=col-md-3>
+        <div class="card card-body">
+            <h4 class="box-title m-b-0">Imagen</h4>
+
+            <img src="" alt="">
+
+        </div>
+
+    </div>
+
+</div>

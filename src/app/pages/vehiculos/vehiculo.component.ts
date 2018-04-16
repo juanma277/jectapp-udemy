@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { Ruta } from '../../models/ruta.model';
+import { RutaService } from '../../services/ruta/ruta.service';
 
 @Component({
   selector: 'app-vehiculo',
@@ -7,9 +10,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VehiculoComponent implements OnInit {
 
-  constructor() { }
+  rutas: Ruta[] = [];
+
+  constructor(public rutaService: RutaService) { }
 
   ngOnInit() {
+    this.rutaService.cargarRutas()
+        .subscribe((resp:any)=>{
+          this.rutas = resp.rutas;
+        });
+  }
+
+  guardarMedico(forma: NgForm){
+    console.log(forma.valid);
+    console.log(forma.value);
+    
   }
 
 }
