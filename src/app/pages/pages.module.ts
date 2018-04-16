@@ -19,6 +19,7 @@ import { UsuariosComponent } from './usuarios/usuarios.component';
 import { ModalUploadComponent } from "../components/modal-upload/modal-upload.component";
 import { VehiculosComponent } from './vehiculos/vehiculos.component';
 import { RutasComponent } from './rutas/rutas.component';
+import { VehiculoComponent } from './vehiculos/vehiculo.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { RutasComponent } from './rutas/rutas.component';
         UsuariosComponent,
         ModalUploadComponent,
         VehiculosComponent,
-        RutasComponent
+        RutasComponent,
+        VehiculoComponent
     ],
     exports:[
         DashboardComponent,

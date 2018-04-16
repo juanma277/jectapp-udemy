@@ -12,6 +12,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { VehiculosComponent } from './vehiculos/vehiculos.component';
 import { RutasComponent } from './rutas/rutas.component';
+import { VehiculoComponent } from './vehiculos/vehiculo.component';
 
 
 const pagesRoutes: Routes = [
@@ -30,8 +31,10 @@ const pagesRoutes: Routes = [
             { path: 'Rxjs', component: RxjsComponent , data:{titulo: 'Obsevables'}}, 
             //Mantenimiento
             { path: 'usuarios', component: UsuariosComponent , data:{titulo: 'Mantenimiento de Usuarios'}},
+            { path: 'rutas', component: RutasComponent , data:{titulo: 'Mantenimiento de Rutas'}},
             { path: 'vehiculos', component: VehiculosComponent , data:{titulo: 'Mantenimiento de Vehiculos'}},
-            { path: 'rutas', component: RutasComponent , data:{titulo: 'Mantenimiento de Rutas'}}
+            { path: 'vehiculo/:id', component: VehiculoComponent , data:{titulo: 'Actualizar vehiculo'}}            
+            
             
             
 

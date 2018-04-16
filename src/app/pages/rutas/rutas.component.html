@@ -28,7 +28,7 @@
             <div class="card-body">
 
                 <div class="text-right">
-                    <button type="button" class="btn waves-effect waves-light btn-rounded btn-primary">
+                    <button (click)="crearRuta()" type="button" class="btn waves-effect waves-light btn-rounded btn-primary">
                     <i class="fa fa-plus"> Crear Ruta</i>
                   </button>
                 </div>
@@ -45,9 +45,9 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let ruta of rutas">
-                            <td><img [src]="ruta.img | imagen:'rutas'" class="img-50 img-circle pointer"></td>
+                            <td><img (click)="actualizarImagen(ruta)" [src]="ruta.img | imagen:'rutas'" class="img-50 pointer"></td>
                             <td>
-                                <input [(ngModel)]="ruta.nombre" name="nombre" type="text" required placeholder="Nombre de la ruta">
+                                <input [(ngModel)]="ruta.nombre" name="nombre" type="text" class="form-control" required placeholder="Nombre de la ruta">
                             </td>
                             <td>
                                 <button (click)="guardarRuta(ruta)" class="btn btn-success">

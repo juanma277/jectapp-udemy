@@ -1,3 +1,81 @@
-<p>
-  vehiculos works!
-</p>
+<div class="row animated bounceInUp">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <input #input (keyup)="buscarVehiculo(input.value)" type="text" class="form-control" placeholder="Buscar vehiculo ...">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row animated bounceInUp" *ngIf="cargando">
+    <div class="col-sm-12">
+        <div class="alert alert-warning text-center">
+            <strong>Cargando ...</strong>
+            <br>
+            <i class="fa fa-refresh fa-spin fa-2x"></i>
+            <br>
+            <span>Espere por favor</span>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <div class="text-right">
+                    <button (click)="crearVehiculo()" type="button" class="btn waves-effect waves-light btn-rounded btn-primary">
+                  <i class="fa fa-plus"> Crear Vehiculo</i>
+                </button>
+                </div>
+
+                <h3 class="card-title">Vehiculos registradas(<small>{{totalRegistros}}</small>)</h3>
+
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Imagen</th>
+                            <th>Nombre</th>
+                            <th>Ruta</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let vehiculo of vehiculos">
+                            <td><img (click)="actualizarImagen(vehiculo)" [src]="vehiculo.img | imagen:'vehiculos'" class="img-50 pointer"></td>
+                            <td>
+                                {{vehiculo.nombre}}
+                            </td>
+                            <td>
+                                {{vehiculo.ruta.nombre}}
+                            </td>
+                            <td>
+                                <button (click)="editarVehiculo(vehiculo)" class="btn btn-success">
+                              <i class="fa fa-edit"></i>
+                            </button>
+
+                                <button (click)="borrarVehiculo(vehiculo)" class="btn btn-danger">
+                                <i class="fa fa-trash-o"></i>
+                              </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <button (click)="cambiarDesde(-5)" class="btn btn-secondary">
+                      Anterior
+              </button>
+
+                <button (click)="cambiarDesde(5)" class="btn btn-secondary">
+                      Siguiente                    
+              </button>
+
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Ruta } from '../../models/ruta.model';
 import { RutaService } from '../../services/ruta/ruta.service';
+import { Title } from '@angular/platform-browser';
+import { ModalUploadService } from '../../components/modal-upload/modal-upload.service';
+
+declare var swal:any;
 
 @Component({
   selector: 'app-rutas',
@@ -14,10 +18,13 @@ export class RutasComponent implements OnInit {
   totalRegistros: number = 0;
   cargando: boolean = true;
 
-  constructor(public rutaService:RutaService) { }
+  constructor(public rutaService:RutaService,
+              public modalUploadService: ModalUploadService) { }
 
   ngOnInit() {
     this.cargarRutas();
+    this.modalUploadService.notificacion
+        .subscribe(()=> this.cargarRutas());
   }
 
   cargarRutas(){
@@ -31,9 +38,45 @@ export class RutasComponent implements OnInit {
   }
 
   guardarRuta(ruta: Ruta){
+    this.rutaService.actualizarRuta(ruta)
+        .subscribe(rutas => this.rutas = rutas);
   }
 
   borrarRuta(ruta: Ruta){
+    
+    swal({
+      title: '¿Esta seguro?',
+      text: 'Estas a punto de eliminar la Ruta: '+ruta.nombre,
+      icon: 'warning',
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((borrar) => {
+      if (borrar) {
+        this.rutaService.borrarRuta(ruta._id)
+            .subscribe(borrado =>{
+              this.cargarRutas();
+            });
+      } 
+    });
+  }
+
+  crearRuta(){
+    swal({
+      title: 'Crear Ruta',
+      text: 'Ingrese el nombre de la ruta',
+      content: 'input',
+      icon: 'info',
+      buttons: true,
+      dangerMode: true    
+    }).then((valor:any) => {
+      if(!valor || valor.length === 0){
+        return;
+      }
+
+      this.rutaService.crearRuta(valor)
+          .subscribe(()=> this.cargarRutas());
+    });
   }
 
   buscarRuta(termino: string){
@@ -65,6 +108,10 @@ export class RutasComponent implements OnInit {
     this.desde += valor;
     this.cargarRutas();
 
+  }
+
+  actualizarImagen(ruta: Ruta){
+    this.modalUploadService.mostrarModal('Rutas', ruta._id);
   }
 
 }

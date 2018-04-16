@@ -48,7 +48,10 @@ export class RutaService {
     url += '?token=' + this.usuarioService.token;
 
     return this.http.put(url, ruta)
-               .map((resp:any)=> resp.ruta);
+               .map((resp:any)=> {
+                 swal('Ruta actualizada','La ruta '+ ruta.nombre + 'ha sido actualizado', 'success');
+                 return resp.ruta
+                });
   }
 
 

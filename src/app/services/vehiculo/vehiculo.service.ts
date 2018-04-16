@@ -20,8 +20,4 @@ export class VehiculoService {
 
   }
 
-  obtenerVehiculo(id: string){
-
-  }
-
 }
