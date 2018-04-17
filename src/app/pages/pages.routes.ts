@@ -17,11 +17,6 @@ import { BusquedaComponent } from './busqueda/busqueda.component';
 
 
 const pagesRoutes: Routes = [
-    { 
-        path: '', 
-        component: PagesComponent,
-        canActivate: [ LoginGuardGuard ], 
-        children:[
             { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
             { path: 'dashboard', component: DashboardComponent , data:{titulo: 'Dashboard'}},
             { path: 'progress', component: ProgressComponent , data:{titulo: 'Progress Bar'} },
@@ -46,7 +41,7 @@ const pagesRoutes: Routes = [
                 data:{titulo: 'Mantenimiento de Rutas'}
             },
             { 
-                path: 'vehiculos', 
+                path: 'vehiculos',
                 component: VehiculosComponent, 
                 canActivate: [ AdminGuard ], 
                 data:{titulo: 'Mantenimiento de Vehiculos'}
@@ -56,8 +51,7 @@ const pagesRoutes: Routes = [
                 component: VehiculoComponent, 
                 canActivate: [ AdminGuard ], 
                 data:{titulo: 'Actualizar vehiculo'}
-            }            
-        ]
+        
     }
 ];
 

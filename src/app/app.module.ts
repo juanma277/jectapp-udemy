@@ -11,24 +11,28 @@ import { PagesModule } from './pages/pages.module';
 //Servicios
 import { ServiceModule  } from "./services/service.module";
 
+
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './login/register.component';
 import { SettingsService } from './services/service.index';
+import { ShareModule } from './shared/shared.module';
+import { PagesComponent } from './pages/pages.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    PagesComponent
   ],
   imports: [
     BrowserModule,
     APP_ROUTES,
-    PagesModule,
     FormsModule,
     ReactiveFormsModule,
-    ServiceModule
+    ServiceModule,
+    ShareModule
   ],
   providers: [],
   bootstrap: [AppComponent]
