@@ -20,6 +20,7 @@ import { ModalUploadComponent } from "../components/modal-upload/modal-upload.co
 import { VehiculosComponent } from './vehiculos/vehiculos.component';
 import { RutasComponent } from './rutas/rutas.component';
 import { VehiculoComponent } from './vehiculos/vehiculo.component';
+import { BusquedaComponent } from './busqueda/busqueda.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { VehiculoComponent } from './vehiculos/vehiculo.component';
         ModalUploadComponent,
         VehiculosComponent,
         RutasComponent,
-        VehiculoComponent
+        VehiculoComponent,
+        BusquedaComponent
     ],
     exports:[
         DashboardComponent,
