@@ -30,9 +30,11 @@ export class ImagenPipe implements PipeTransform {
         url += '/rutas/' + img;        
       break;
 
+      case 'empresas':
+        url += '/empresas/' + img;        
+      
       default:
-        console.log("Tipo de imagen no existe");
-        url += '/usuarios/XXX';
+        break;
     }
 
     return url;

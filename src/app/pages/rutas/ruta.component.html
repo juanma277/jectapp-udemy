@@ -1,0 +1,124 @@
+<div class=row>
+    <div class="col-md-6">
+
+        <div class="card card-body">
+            <h3 class="box-title m-b-0">Ruta: {{ruta.nombre}}</h3>
+            <p class="text-muted m-b-30 font-13"> Espacio para {{textoAccion}}. </p>
+            <div class="row">
+                <div class="col-sm-12 col-xs-12">
+                    <form #f="ngForm" ngNativeValidate (ngSubmit)="guardarRuta(f)">
+                        <div class="form-group">
+                            <label>Nombre de la Ruta</label>
+                            <input [(ngModel)]="ruta.nombre" name="nombre" type="text" class="form-control" placeholder="Nombre" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Empresa</label>
+                            <select (change)="cambioEmpresa($event.target.value)" [(ngModel)]="ruta.empresa" name="ruta" class="form-control" required>
+                              <option value="" selected>Seleccione la Empresa</option>
+                              <option *ngFor="let empresa of empresas" [value]="empresa._id">
+                                {{empresa.nombre}}
+                              </option>
+                            </select>
+
+                        </div>
+
+                        <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">
+                          <i class="fa fa-save"></i>
+                          GUARDAR
+                        </button>
+                        <a routerLink="/rutas" class="btn btn-inverse waves-effect waves-light">
+                          CANCELAR
+                        </a>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-md-3">
+        <div class="card card-body">
+            <h4 class="box-title m-b-0">Empresa</h4>
+
+            <img [src]="empresa.img1 | imagen:'empresas'" class="rounded img-fluid">
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3" *ngIf="ruta._id">
+        <div class="card card-body">
+            <h4 class="box-title m-b-0">Imagen</h4>
+
+            <img (click)="cambiarFoto()" [src]="ruta.img | imagen:'rutas'" class="img-circle img-fluid pointer">
+
+        </div>
+
+    </div>
+
+    <div class="col-md-12 align-content-center" *ngIf="ruta._id">
+        <div class="card card-body">
+            <div class="row">
+
+                <div class="form-group col-12 text-center">
+                    <strong><h4 class="box-title m-b-0 text-center">Ubicar Origen y Destino</h4></strong>
+                </div>
+
+
+                <div class="form-group col-4">
+                    <p><strong>Destino: </strong>Doble click sobre un punto en el Mapa</p>
+                </div>
+
+                <div class="form-group col-3">
+                    <p><strong>Origen: </strong>Click sobre un punto en el Mapa</p>
+                </div>
+
+                <div class="col-3 text-right">
+                    <button class="btn btn-success waves-effect waves-light m-r-10" *ngIf="lat_origen && lng_destino " (click)="ActualizarCoordenadas()">
+                        <i class="fa fa-save"></i>
+                        GUARDAR
+                    </button>
+                </div>
+            </div>
+
+
+            <agm-map [latitude]="lat" [longitude]="lng" [scrollwheel]="true" [zoom]="zoom" (mapClick)="placeMarkerOrigen($event)" (mapDblClick)="placeMarkerDestino($event)">
+                <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+                <agm-marker [label]="'Origen'" [iconUrl]="'assets/images/markets/tienda.png'" [latitude]="lat_origen" [longitude]="lng_origen"></agm-marker>
+                <agm-marker [label]="'Destino'" [iconUrl]="'assets/images/markets/tienda.png'" [latitude]="lat_destino" [longitude]="lng_destino"></agm-marker>
+
+            </agm-map>
+
+            <br><br>
+
+            <div class="row">
+
+                <div class="form-group col-3">
+                    <label>Latitud Origen</label>
+                    <input type="text" class="form-control" ngModel="{{lat_origen}}" disabled>
+                </div>
+
+                <div class="form-group col-3">
+                    <label>Longitud Origen</label>
+                    <input type="text" class="form-control" ngModel="{{lng_origen}}" disabled>
+                </div>
+
+                <div class="form-group col-3">
+                    <label>Latitud Destino</label>
+                    <input type="text" class="form-control" ngModel="{{lat_destino}}" disabled>
+                </div>
+
+                <div class="form-group col-3">
+                    <label>Longitud Destino</label>
+                    <input type="text" class="form-control" ngModel="{{lng_destino}}" disabled>
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</div>

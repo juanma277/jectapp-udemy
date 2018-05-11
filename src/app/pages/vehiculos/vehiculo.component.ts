@@ -16,7 +16,7 @@ export class VehiculoComponent implements OnInit {
 
   rutas: Ruta[] = [];
   vehiculo: Vehiculo = new Vehiculo('','','','','');
-  ruta: Ruta = new Ruta('');
+  ruta: Ruta = new Ruta('', '', null, null, null, null, '');
   textoAccion: string = 'crear un vehiculo';
 
   constructor(public rutaService: RutaService,
@@ -48,7 +48,7 @@ export class VehiculoComponent implements OnInit {
   }
 
   cargarVehiculo(id: string){
-    this.vehiculoService.cargarMedico(id)
+    this.vehiculoService.cargarVehiculo(id)
         .subscribe(vehiculo => {
           this.vehiculo = vehiculo;
           this.vehiculo.ruta = vehiculo.ruta._id;
@@ -80,5 +80,5 @@ export class VehiculoComponent implements OnInit {
     this.rutaService.obtenerRuta(id)
         .subscribe(ruta=> this.ruta = ruta);
   }
-
+ 
 }

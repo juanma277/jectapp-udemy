@@ -1,0 +1,60 @@
+<div class="row caja">
+    <div class="col-md-6">
+        <div class="card card-body">
+            <div class="clearfix"></div>
+            <h3 class="box-title m-t-40 m-b-0">Nuevo Usuario </h3><small>Por favor ingresa todos los campos solicitados.</small>
+
+            <form ngNativeValidate [formGroup]="forma" (ngSubmit)="registrarUsuario()" class="form-horizontal form-material" id="loginform">
+                <div class="form-group m-t-20">
+                    <div class="col-xs-12">
+                        <input formControlName="nombre" name="nombre" class="form-control" type="text" required placeholder="Nombres">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <input formControlName="email" name="email" class="form-control" type="email" required placeholder="Email">
+                    </div>
+                </div>
+
+                <div class="form-group">
+
+                    <select formControlName="role" name="role" class="form-control">
+                        <option value="">ROL</option>
+                        <option value="USER_ROLE">Usuario</option>
+                        <option value="ADMIN_ROLE">Administrador</option>
+                        <option value="BUSINESS_ROLE">Empresa</option> 
+                        <option value="SUPER_ROLE">Super User</option>                                  
+                      </select>
+
+                </div>
+
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <input formControlName="password" name="password" class="form-control" type="password" required placeholder="Contraseña">
+                    </div>
+                </div>
+                <div class="form-group" *ngIf="forma.errors?.sonIguales && !forma.pristine">
+                    <p class="text-danger">Las contraseñas no coinciden!</p>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <input formControlName="password2" name="password2" class="form-control" type="password" required placeholder="Confirma Contraseña">
+                    </div>
+                </div>
+
+                <div class="form-group text-center m-t-20">
+                    <div class="col-xs-12">
+                        <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">
+                                    <i class="fa fa-save"></i>
+                                      CREAR CUENTA
+                            </button>
+
+                        <a routerLink="/usuarios" class="btn btn-inverse waves-effect waves-light">
+                                CANCELAR
+                              </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -17,9 +17,9 @@
             <div class="card-body">
 
                 <div class="text-right">
-                    <button (click)="crearRuta()" type="button" class="btn waves-effect waves-light btn-rounded btn-primary">
-                    <i class="fa fa-plus"> Crear Ruta</i>
-                  </button>
+                    <button [routerLink]="['/ruta','nuevo']" type="button" class="btn waves-effect waves-light btn-rounded btn-primary">
+                            <i class="fa fa-plus"> Crear Ruta</i>
+                    </button>
                 </div>
 
                 <h3 class="card-title">Rutas registradas(<small>{{totalRegistros}}</small>)</h3>

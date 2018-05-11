@@ -14,7 +14,12 @@ import { VehiculosComponent } from './vehiculos/vehiculos.component';
 import { RutasComponent } from './rutas/rutas.component';
 import { VehiculoComponent } from './vehiculos/vehiculo.component';
 import { BusquedaComponent } from './busqueda/busqueda.component';
-
+import { EmpresaComponent } from './empresa/empresa.component';
+import { EmpresasComponent } from './empresas/empresas.component';
+import { BarriosComponent } from './barrios/barrios.component';
+import { BarrioComponent } from './barrios/barrio.component';
+import { UsuarioComponent } from './usuarios/usuario.component';
+import { RutaComponent } from './rutas/ruta.component';
 
 const pagesRoutes: Routes = [
             { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
@@ -23,6 +28,7 @@ const pagesRoutes: Routes = [
             { path: 'account-settings', component: AccountSettingsComponent , data:{titulo: 'Ajustes'}},                        
             { path: 'graficas1', component: Graficas1Component , data:{titulo: 'Graficas'} },
             { path: 'perfil', component: ProfileComponent , data:{titulo: 'Perfil de Usuario'}},
+            { path: 'empresa', component: EmpresaComponent , data:{titulo: 'Datos de Empresa'}},            
             { path: 'promesas', component: PromesasComponent , data:{titulo: 'Promesas'}},
             { path: 'Rxjs', component: RxjsComponent , data:{titulo: 'Obsevables'}}, 
             { path: 'busqueda/:termino', component: BusquedaComponent , data:{titulo: 'Buscador'}},
@@ -35,10 +41,22 @@ const pagesRoutes: Routes = [
                 data:{titulo: 'Mantenimiento de Usuarios'}
             },
             { 
+                path: 'usuario/:id', 
+                component: UsuarioComponent, 
+                canActivate: [ AdminGuard ], 
+                data:{titulo: 'Crear Usuario'}
+            },
+            { 
                 path: 'rutas', 
                 component: RutasComponent, 
                 canActivate: [ AdminGuard ], 
                 data:{titulo: 'Mantenimiento de Rutas'}
+            },
+            { 
+                path: 'ruta/:id', 
+                component: RutaComponent, 
+                canActivate: [ AdminGuard ], 
+                data:{titulo: 'Crear/Actualizar ruta'}
             },
             { 
                 path: 'vehiculos',
@@ -50,9 +68,27 @@ const pagesRoutes: Routes = [
                 path: 'vehiculo/:id', 
                 component: VehiculoComponent, 
                 canActivate: [ AdminGuard ], 
-                data:{titulo: 'Actualizar vehiculo'}
-        
-    }
+                data:{titulo: 'Crear/Actualizar vehiculo'}
+            },
+            { 
+                path: 'empresas', 
+                component: EmpresasComponent, 
+                canActivate: [ AdminGuard ], 
+                data:{titulo: 'Mantenimientos de Empresas'}
+            },
+            { 
+                path: 'barrios', 
+                component: BarriosComponent, 
+                canActivate: [ AdminGuard ], 
+                data:{titulo: 'Mantenimientos de Barrios'}
+            },
+            { 
+                path: 'barrio/:id', 
+                component: BarrioComponent, 
+                canActivate: [ AdminGuard ], 
+                data:{titulo: 'Crear/Actualizar Barrio'}
+            }
+    
 ];
 
 export const PAGES_ROUTES = RouterModule.forChild( pagesRoutes );

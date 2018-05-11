@@ -18,13 +18,19 @@ import { RegisterComponent } from './login/register.component';
 import { SettingsService } from './services/service.index';
 import { ShareModule } from './shared/shared.module';
 import { PagesComponent } from './pages/pages.component';
+import { PrincipalComponent } from './principal/principal.component';
+import { AgmCoreModule } from '@agm/core';
+import { TypeaheadModule } from 'ngx-bootstrap';
+//import { TypeaheadModule } from 'ngx-type-ahead';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    PagesComponent
+    PagesComponent,
+    PrincipalComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +38,12 @@ import { PagesComponent } from './pages/pages.component';
     FormsModule,
     ReactiveFormsModule,
     ServiceModule,
-    ShareModule
+    ShareModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyAGgspWVCEGTGTKSUTbymXM2Cs2AdV6FEI'
+    }),
+    //TypeaheadModule
+    TypeaheadModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

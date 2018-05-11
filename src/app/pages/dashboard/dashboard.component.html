@@ -1,3 +1,25 @@
-<p>
-  dashboard works!
-</p>
+<div class="row">
+
+    <div class="col-md-9">
+
+        <agm-map [latitude]="lat" [longitude]="lng">
+            <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+        </agm-map>
+
+    </div>
+
+    <div class="col-md-3">
+
+        <div class="list-group">
+            <button type="button" class="list-group-item list-group-item-action active">
+                      Vehiculos en Línea
+                    </button>
+            <button type="button" *ngFor="let vehiculo of vehiculos" class="list-group-item list-group-item-action">
+                Dapibus ac facilisis in
+            </button>
+        </div>
+
+
+    </div>
+
+</div>

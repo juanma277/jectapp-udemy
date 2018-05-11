@@ -2,6 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 
+import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
+
+const config: SocketIoConfig = { url: 'http://localhost:4200', options: {origin:'http: // localhost: 4200'} };
+
 import { SettingsService, 
          SidebarService, 
          SharedService, 
@@ -11,14 +15,20 @@ import { SettingsService,
          VerificaTokenGuard,
          SubirArchivoService, 
          VehiculoService, 
-         RutaService } from "./service.index";
+         RutaService,
+         SocketService,
+         ChatService, 
+         BarriosService,
+         UbicacionService,
+         EmpresaService } from "./service.index";
          
 import { ModalUploadService } from '../components/modal-upload/modal-upload.service';
 
 @NgModule({
   imports: [
     CommonModule,
-    HttpClientModule
+    HttpClientModule,
+    SocketIoModule.forRoot(config) 
   ],
   providers:[
     SettingsService, 
@@ -31,7 +41,12 @@ import { ModalUploadService } from '../components/modal-upload/modal-upload.serv
     ModalUploadService,
     VehiculoService,
     RutaService,
-    VerificaTokenGuard
+    VerificaTokenGuard,
+    SocketService,
+    ChatService,
+    BarriosService,
+    UbicacionService,
+    EmpresaService
   ],
   declarations: []
 })

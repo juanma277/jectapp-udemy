@@ -1,0 +1,86 @@
+<div class="row animated bounceInUp">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <input #input (keyup)="buscarBarrio(input.value)" type="text" class="form-control" placeholder="Buscar barrio ...">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row animated bounceInUp" *ngIf="cargando">
+    <div class="col-sm-12">
+        <div class="alert alert-warning text-center">
+            <strong>Cargando ...</strong>
+            <br>
+            <i class="fa fa-refresh fa-spin fa-2x"></i>
+            <br>
+            <span>Espere por favor</span>
+        </div>
+    </div>
+</div>
+
+<div class="row animated bounceInUp" *ngIf="!cargando">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <div class="text-right">
+                    <button [routerLink]="['/barrio','nuevo']" type="button" class="btn waves-effect waves-light btn-rounded btn-primary">
+                  <i class="fa fa-plus"> Crear Barrio</i>
+                </button>
+                </div>
+
+                <h3 class="card-title">Barrios Registrados (<small>{{totalRegistros}}</small>)</h3>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Latitud</th>
+                            <th>Longitud</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let barrio of barrios">
+                            <td>
+                                <input [(ngModel)]="barrio.nombre" name="nombre" type="text" class="form-control" required placeholder="Nombre del barrio">
+                            </td>
+                            <td>
+                                <input [(ngModel)]="barrio.lat" name="lat" type="text" class="form-control" required placeholder="Latitud">
+                            </td>
+                            <td>
+                                <input [(ngModel)]="barrio.lng" name="lng" type="text" class="form-control" required placeholder="Longitud">
+                            </td>
+
+                            <td>
+                                <button (click)="guardarBarrio(barrio)" class="btn btn-success">
+                              <i class="fa fa-save"></i>
+                              </button>
+
+                                <button [routerLink]="['/barrio',barrio._id ]" class="btn btn-warning">
+                                <i class="fa fa-edit"></i>
+                              </button>
+
+                                <button (click)="borrarBarrio(barrio)" class="btn btn-danger">
+                                <i class="fa fa-trash-o"></i>
+                              </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <button (click)="cambiarDesde(-5)" class="btn btn-secondary">
+                Anterior
+              </button>
+
+                <button (click)="cambiarDesde(5)" class="btn btn-secondary">
+                Siguiente                    
+              </button>
+
+            </div>
+        </div>
+    </div>
+</div>

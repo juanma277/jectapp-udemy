@@ -5,17 +5,18 @@ import { LoginComponent } from './login/login.component';
 import { NopagefoundComponent } from './shared/nopagefound/nopagefound.component';
 import { RegisterComponent } from './login/register.component';
 import { LoginGuardGuard } from './services/service.index';
+import { PrincipalComponent } from './principal/principal.component';
 
 
 const appRoutes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
+    { path: 'inicio', component: PrincipalComponent },    
     {
         path: '',
         component: PagesComponent,
         canActivate: [LoginGuardGuard],
         loadChildren: './pages/pages.module#PagesModule'
-
     },
     { path: '**', component: NopagefoundComponent }
 ];

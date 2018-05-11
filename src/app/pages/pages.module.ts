@@ -1,5 +1,5 @@
 import { NgModule } from "@angular/core";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ShareModule } from "../shared/shared.module";
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { ProgressComponent } from "./progress/progress.component";
@@ -19,7 +19,13 @@ import { VehiculosComponent } from './vehiculos/vehiculos.component';
 import { RutasComponent } from './rutas/rutas.component';
 import { VehiculoComponent } from './vehiculos/vehiculo.component';
 import { BusquedaComponent } from './busqueda/busqueda.component';
-
+import { AgmCoreModule } from '@agm/core';
+import { EmpresaComponent } from './empresa/empresa.component';
+import { BarriosComponent } from './barrios/barrios.component';
+import { EmpresasComponent } from './empresas/empresas.component';
+import { BarrioComponent } from './barrios/barrio.component';
+import { UsuarioComponent } from './usuarios/usuario.component';
+import { RutaComponent } from './rutas/ruta.component';
 
 @NgModule({
     declarations:[
@@ -36,7 +42,13 @@ import { BusquedaComponent } from './busqueda/busqueda.component';
         VehiculosComponent,
         RutasComponent,
         VehiculoComponent,
-        BusquedaComponent
+        BusquedaComponent,
+        EmpresaComponent,
+        BarriosComponent,
+        EmpresasComponent,
+        BarrioComponent,
+        UsuarioComponent,
+        RutaComponent
     ],
     exports:[
         DashboardComponent,
@@ -49,7 +61,11 @@ import { BusquedaComponent } from './busqueda/busqueda.component';
         PAGES_ROUTES,
         FormsModule,
         ChartsModule,
-        PipesModule
+        ReactiveFormsModule,
+        PipesModule,
+        AgmCoreModule.forRoot({
+            apiKey: 'AIzaSyAGgspWVCEGTGTKSUTbymXM2Cs2AdV6FEI'
+          })
     ]
 })
 export class PagesModule { }

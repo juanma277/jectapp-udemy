@@ -21,7 +21,7 @@ export class UsuarioService {
 
   constructor( public http: HttpClient,
                public router: Router,
-              public subirArchivoService: SubirArchivoService) {
+               public subirArchivoService: SubirArchivoService) {
     this.cargarStorage();
    }
 
@@ -82,7 +82,7 @@ export class UsuarioService {
      localStorage.removeItem('menu');
      
 
-     this.router.navigate(['/login']);
+     this.router.navigate(['/inicio']);
      
    }
 
@@ -133,7 +133,7 @@ export class UsuarioService {
 
                 });
    }
-
+ 
    actualizarUsuario(usuario: Usuario){
 
     let url = URL_SERVICIOS + '/usuario/' + usuario._id;
@@ -158,8 +158,8 @@ export class UsuarioService {
 
               });
 
-              }
-
+  }
+ 
    cambiarImagen(archivo: File, id: string){
      this.subirArchivoService.subirArchivo(archivo,'Usuarios', id)
          .then((resp:any)=>{
@@ -186,6 +186,16 @@ export class UsuarioService {
     return this.http.get(url)
                 .map((resp:any)=> resp.usuarios);
      
+   }
+
+   resetPassword(id:string){
+    let url = URL_SERVICIOS + '/usuario/reset/' + id;
+    url += '?token=' + this.token;
+    return this.http.get(url)
+               .map(resp =>{
+                 swal('Usuario actualizado','La contraseña del usuario ha sido reestablecida', 'success');
+                 return true;
+               });
    }
 
    borrarUsuario(id:string){

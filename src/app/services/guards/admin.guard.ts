@@ -12,7 +12,7 @@ export class AdminGuard implements CanActivate {
   }
   canActivate() {
 
-    if(this.usuarioService.usuario.role === 'ADMIN_ROLE'){
+    if(this.usuarioService.usuario.role === 'ADMIN_ROLE' || this.usuarioService.usuario.role === 'SUPER_ROLE' ){
       return true;
     }else{
       this.router.navigate(['/dashboard']);

@@ -39,7 +39,7 @@ export class VehiculoService {
                .map((resp:any) => swal('Vehiculo Eliminado', 'Vehiculo eliminado correctamente', 'success'));
   }
 
-  cargarMedico(id: string){
+  cargarVehiculo(id: string){
     let url = URL_SERVICIOS + '/vehiculo/' + id;
     return this.http.get(url)
         .map((resp:any) => resp.vehiculo);  

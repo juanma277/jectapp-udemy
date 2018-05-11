@@ -15,6 +15,11 @@ export class RutaService {
     return this.http.get(url);
   }
 
+  cargarRutasAll(){
+    let url = URL_SERVICIOS + '/ruta/All';
+    return this.http.get(url);
+  }
+
   obtenerRuta(id: string){
     let url = URL_SERVICIOS + '/ruta/'+id;
     return this.http.get(url)
@@ -27,6 +32,31 @@ export class RutaService {
 
     return this.http.delete(url)
                .map(resp => swal('Ruta Eliminada', 'Ruta elimada correctamente', 'success'));
+  }
+
+  guardarRuta(ruta: Ruta){
+    let url = URL_SERVICIOS + '/ruta/';  
+
+    if (ruta._id){
+      //Actualizando
+      url += '/' +ruta._id;
+      url += '?token=' + this.usuarioService.token;     
+
+      return this.http.put(url, ruta)
+                .map((resp:any) => {
+                  swal('Ruta actualizada', 'La ruta '+ruta.nombre+' ha sido actualizada.', 'success');
+                  return resp.ruta;          
+                });
+    }else{
+      //Creando
+      url += '?token=' + this.usuarioService.token;
+      return this.http.post(url, ruta)
+        .map((resp:any) => {
+          swal('Ruta creada', 'La Ruta '+ruta.nombre+' ha sido creada.', 'success');
+          return resp.ruta;
+        });
+    }
+    
   }
 
   crearRuta(nombre: string){
@@ -52,6 +82,14 @@ export class RutaService {
                  swal('Ruta actualizada','La ruta '+ ruta.nombre + 'ha sido actualizado', 'success');
                  return true;
                 });
+  }
+
+  buscarRutaOrigenDestino(lat_origen: number, lng_origen:number, lat_destino:number, lng_destino:number){
+
+    let url = URL_SERVICIOS +'/ruta/'+ lat_origen +'/' + lng_origen + '/' + lat_destino + '/' + lng_destino;
+    return this.http.get(url);
+
+
   }
 
 

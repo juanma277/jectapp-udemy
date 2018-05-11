@@ -1,0 +1,255 @@
+<div *ngIf="empresa">
+    <div class="row animated fadeInUp" *ngFor="let data of empresa">
+
+        <div class="col-lg-7">
+
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-subtitle">Espacio para editar los datos de la Empresa</h6>
+                    <form ngNativeValidate #f="ngForm" (ngSubmit)="guardar(f.value)" class="form p-t-20">
+                        <input [ngModel]="data._id" name="_id" type="hidden" class="form-control" placeholder="Nombre" required>
+
+                        <div class="form-group">
+                            <label for="InputName">Nombre</label>
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="ti-user"></i></div>
+                                <input [ngModel]="data.nombre" name="nombre" type="text" class="form-control" placeholder="Nombre" required>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="InputInformacion">Información</label>
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="ti-info"></i></div>
+                                <textarea [ngModel]="data.informacion" name="informacion" class="form-control" placeholder="Información" required> </textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="InputNameDescripcion">Descripción</label>
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="ti-info-alt"></i></div>
+                                <textarea [ngModel]="data.descripcion" name="descripcion" class="form-control" placeholder="Descripción" required> </textarea>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">
+                   <i class="fa fa-save"></i>
+                     ACTUALIZAR DATOS
+                  </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-subtitle">Edita la ubicación de tu Empresa</h6>
+
+                    <agm-map [latitude]="data.lat" [longitude]="data.lng" [scrollwheel]="true" [zoom]="zoom" (mapClick)="placeMarker($event)">
+                        <agm-marker [iconUrl]="'assets/images/markets/tienda.png'" [latitude]="data.lat" [longitude]="data.lng">
+
+                            <agm-info-window>
+                                <div class="card-body">
+                                    <h4 class="card-title">{{data.nombre}}</h4>
+                                    <h6 class="card-title">{{data.informacion}}</h6>
+                                    <div class="clearfix"></div>
+                                    <img [src]="data.img1 | imagen:'empresas'" width="90">
+                                    <img [src]="data.img2 | imagen:'empresas'" width="90">
+                                    <img [src]="data.img3 | imagen:'empresas'" width="90">
+                                    <img [src]="data.img4 | imagen:'empresas'" width="90">
+                                    <br><br>
+                                    <h6 class="card-title">{{data.descripcion}}</h6>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </agm-info-window>
+
+                        </agm-marker>
+                        <agm-marker [label]="'Nueva Ubicacion'" [iconUrl]="'assets/images/markets/tienda.png'" [latitude]="lat_update" [longitude]="lng_update">
+
+                            <agm-info-window>
+                                <div class="card-body">
+                                    <h4 class="card-title">{{data.nombre}}</h4>
+                                    <h6 class="card-title">{{data.informacion}}</h6>
+                                    <div class="clearfix"></div>
+                                    <img [src]="data.img1 | imagen:'empresas'" width="80">
+                                    <img [src]="data.img2 | imagen:'empresas'" width="80">
+                                    <img [src]="data.img3 | imagen:'empresas'" width="80">
+                                    <img [src]="data.img4 | imagen:'empresas'" width="80">
+                                    <br><br>
+                                    <h6 class="card-title">{{data.descripcion}}</h6>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </agm-info-window>
+
+                        </agm-marker>
+                    </agm-map>
+
+                    <br>
+                    <button class="btn btn-success waves-effect waves-light m-r-10" [disabled]="!lat_update" (click)="actualizarUbicacion(data._id)">
+                        <i class="fa fa-save"></i> ACTUALIZAR UBICACIÓN
+                    </button>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+        <div class="col-lg-5">
+            <div class="card">
+                <div class="card-body" align="center">
+                    <h4 class="card-title">Imagen 1</h4>
+
+                    <img *ngIf="!imagenTemporal1" [src]="data.img1 | imagen:'empresas'" class="w160">
+                    <img *ngIf="imagenTemporal1" [src]="imagenTemporal1" class="w160">
+                    <br>
+                    <br>
+
+
+                    <input (change)="seleccionImage($event.target.files[0], 1)" type="file">
+                    <br>
+                    <br>
+                    <button (click)="cambiarImagen(data._id, 1)" [disabled]="!imagenSubir" type="button" class="btn btn-success waves-effect waves-light m-r-10">
+                  <i class="fa fa-save"></i>
+                    CAMBIAR IMAGEN
+              </button>
+
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body" align="center">
+                    <h4 class="card-title">Imagen 2</h4>
+
+                    <img *ngIf="!imagenTemporal2" [src]="data.img2 | imagen:'empresas'" class="w160">
+                    <img *ngIf="imagenTemporal2" [src]="imagenTemporal2" class="w160">
+                    <br>
+                    <br>
+
+                    <input (change)="seleccionImage($event.target.files[0], 2)" type="file">
+                    <br>
+                    <br>
+                    <button (click)="cambiarImagen(data._id, 2)" [disabled]="!imagenSubir" type="button" class="btn btn-success waves-effect waves-light m-r-10">
+                      <i class="fa fa-save"></i>
+                      CAMBIAR IMAGEN
+                  </button>
+
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body" align="center">
+                    <h4 class="card-title">Imagen 3</h4>
+
+                    <img *ngIf="!imagenTemporal3" [src]="data.img3 | imagen:'empresas'" class="w160">
+                    <img *ngIf="imagenTemporal3" [src]="imagenTemporal3" class="w160">
+                    <br>
+                    <br>
+
+                    <input (change)="seleccionImage($event.target.files[0], 3)" type="file">
+                    <br>
+                    <br>
+                    <button (click)="cambiarImagen(data._id, 3)" [disabled]="!imagenSubir" type="button" class="btn btn-success waves-effect waves-light m-r-10">
+                          <i class="fa fa-save"></i>
+                          CAMBIAR IMAGEN
+                      </button>
+
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body" align="center">
+                    <h4 class="card-title">Imagen 4</h4>
+
+                    <img *ngIf="!imagenTemporal4" [src]="data.img4 | imagen:'empresas'" class="w160">
+                    <img *ngIf="imagenTemporal4" [src]="imagenTemporal4" class="w160">
+                    <br>
+                    <br>
+
+                    <input (change)="seleccionImage($event.target.files[0], 4)" type="file">
+                    <br>
+                    <br>
+                    <button (click)="cambiarImagen(data._id, 4)" [disabled]="!imagenSubir" type="button" class="btn btn-success waves-effect waves-light m-r-10">
+                              <i class="fa fa-save"></i>
+                                 CAMBIAR IMAGEN
+                          </button>
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+<div *ngIf="empresa.length === 0">
+    <div class="row animated fadeInUp">
+
+        <div class="col-lg-5">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-subtitle">Selecciona la ubicación de tu Empresa</h6>
+
+                    <agm-map [latitude]="lat" [longitude]="lng" [scrollwheel]="true" [zoom]="zoom" (mapClick)="placeMarker($event)">
+                        <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+                        <agm-marker [iconUrl]="'assets/images/markets/tienda.png'" [latitude]="lat_update" [longitude]="lng_update">
+
+                        </agm-marker>
+                    </agm-map>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-7">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-subtitle">Espacio para configurar los datos de la Empresa</h6>
+                    <form ngNativeValidate #f="ngForm" class="form-horizontal form-material" (ngSubmit)="crear(f)" class="form p-t-20">
+
+                        <div class="form-group">
+                            <label for="InputName">Nombre</label>
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="ti-user"></i></div>
+                                <input [ngModel]="nombre" name="nombre" type="text" class="form-control" placeholder="Nombre" required>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="InputInformacion">Información</label>
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="ti-info"></i></div>
+                                <textarea [ngModel]="informacion" name="informacion" class="form-control" placeholder="Información" required> </textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="InputNameDescripcion">Descripción</label>
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="ti-info-alt"></i></div>
+                                <textarea [ngModel]="descripcion" name="descripcion" class="form-control" placeholder="Descripción" required> </textarea>
+                            </div>
+                        </div>
+
+                        <div class="text-right">
+                            <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">
+                                        <i class="fa fa-save"></i>
+                                          CREAR EMPRESA
+                            </button>
+                        </div>
+
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

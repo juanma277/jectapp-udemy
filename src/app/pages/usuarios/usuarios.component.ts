@@ -16,12 +16,16 @@ export class UsuariosComponent implements OnInit {
   desde: number = 0;
   totalRegistros: number = 0;
   cargando: boolean = true;
+  role:string;
 
   constructor(public usuarioService: UsuarioService,
-              public modalUploadService: ModalUploadService) { }
+              public modalUploadService: ModalUploadService) { 
+
+                this.role = this.usuarioService.usuario.role;
+              }
 
   ngOnInit() {
-    this.cargarUsuarios();
+    this.cargarUsuarios(); 
 
     this.modalUploadService.notificacion
         .subscribe(resp => this.cargarUsuarios());
@@ -98,8 +102,24 @@ export class UsuariosComponent implements OnInit {
     this.modalUploadService.mostrarModal('Usuarios', id);
   }
 
-  crearUsuario(){
-    
+  resetPassword(usuario: Usuario){
+
+    swal({
+      title: '¿Esta seguro?',
+      text: 'Estas a punto de resetear la contraseña de: '+usuario.nombre,
+      icon: 'warning',
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((borrar) => {
+      if (borrar) {
+        this.usuarioService.resetPassword(usuario._id)
+            .subscribe(reset =>{
+              this.cargarUsuarios();
+            });
+      } 
+    });
+
   }
 
 }
