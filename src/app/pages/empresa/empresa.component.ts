@@ -3,6 +3,7 @@ import { Empresa } from '../../models/empresa.model';
 import { EmpresaService, UsuarioService } from '../../services/service.index';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { STYLEMAP } from '../../config/config';
 
 
 @Component({
@@ -34,6 +35,8 @@ export class EmpresaComponent implements OnInit {
   imagenTemporal3: string;
   imagenTemporal4: string;
 
+  styleArray: any;
+
   infoWindowOpened = null;
   
 
@@ -41,6 +44,7 @@ export class EmpresaComponent implements OnInit {
               public usuarioService: UsuarioService,
               public router: Router) {
                 this.setCurrentPosition();
+                this.styleArray = STYLEMAP;
                }
 
   ngOnInit() {
@@ -95,6 +99,7 @@ export class EmpresaComponent implements OnInit {
       'BUSINESS', 
       forma.value.informacion, 
       forma.value.descripcion, 
+      '',
       this.lat_update, 
       this.lng_update,
       null,
@@ -153,8 +158,6 @@ export class EmpresaComponent implements OnInit {
     if(imagen === 4){
       reader.onloadend = () => this.imagenTemporal4 = reader.result;
     }
-
-    
     
   }
 

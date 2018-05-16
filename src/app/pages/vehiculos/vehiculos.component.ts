@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Vehiculo } from '../../models/vehiculo.model';
 import { VehiculoService } from '../../services/service.index';
+import { ModalUploadService } from '../../components/modal-upload/modal-upload.service';
 
 declare var swal:any;
 
@@ -15,10 +16,13 @@ export class VehiculosComponent implements OnInit {
   totalRegistros: number = 0;
   desde: number = 0;
 
-  constructor( public vehiculoService: VehiculoService ) { }
+  constructor( public vehiculoService: VehiculoService,
+    public modalUploadService: ModalUploadService ) { }
 
   ngOnInit() {
     this.cargarVehiculos();
+    this.modalUploadService.notificacion
+        .subscribe(()=> this.cargarVehiculos());
   }
 
   buscarVehiculo(termino: string){
@@ -39,8 +43,8 @@ export class VehiculosComponent implements OnInit {
         });
   }
 
-  actualizarImagen(){
-
+  actualizarImagen(vehiculo: Vehiculo){
+    this.modalUploadService.mostrarModal('Vehiculos', vehiculo._id);
   }
 
   obtenerVehiculo(id: string){

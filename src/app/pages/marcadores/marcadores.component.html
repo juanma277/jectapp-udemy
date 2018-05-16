@@ -1,0 +1,91 @@
+<div class="row animated bounceInUp">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <input #input (keyup)="buscarMarcador(input.value)" type="text" class="form-control" placeholder="Buscar Marcador ...">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row animated bounceInUp" *ngIf="cargando">
+    <div class="col-sm-12">
+        <div class="alert alert-warning text-center">
+            <strong>Cargando ...</strong>
+            <br>
+            <i class="fa fa-refresh fa-spin fa-2x"></i>
+            <br>
+            <span>Espere por favor</span>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <div class="text-right">
+                    <button [routerLink]="['/marcador','nuevo']" type="button" class="btn waves-effect waves-light btn-rounded btn-primary">
+                <i class="fa fa-plus"> Crear Marcador</i>
+              </button>
+                </div>
+
+                <h3 class="card-title">Marcadores Registrados(<small>{{totalRegistros}}</small>)</h3>
+
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Icono</th>
+                            <th>Nombre</th>
+                            <th>Latitud</th>
+                            <th>longitud</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let marcador of marcadores">
+
+                            <td>
+                                <img [src]="marcador.icono | imagen:'iconos'" class="img-30 img-circle">
+                            </td>
+                            <td>
+                                <input [(ngModel)]="marcador.nombre" name="nombre" type="text" class="form-control" required placeholder="Nombre">
+                            </td>
+                            <td>
+                                <input [(ngModel)]="marcador.lat" name="lat" type="text" class="form-control" required placeholder="Latitud">
+                            </td>
+                            <td>
+                                <input [(ngModel)]="marcador.lng" name="lng" type="text" class="form-control" required placeholder="Longitud">
+                            </td>
+                            <td>
+                                <button (click)="guardarMarcador(marcador)" class="btn btn-success">
+                                    <i class="fa fa-save"></i>
+                                </button>
+
+                                <button [routerLink]="['/marcador',marcador._id ]" class="btn btn-warning">
+                                    <i class="fa fa-edit"></i>
+                                </button>
+
+                                <button (click)="borrarMarcador(marcador)" class="btn btn-danger">
+                                    <i class="fa fa-trash-o"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <button (click)="cambiarDesde(-5)" class="btn btn-secondary">
+                    Anterior
+            </button>
+
+                <button (click)="cambiarDesde(5)" class="btn btn-secondary">
+                    Siguiente                    
+            </button>
+
+
+            </div>
+        </div>
+    </div>
+</div>

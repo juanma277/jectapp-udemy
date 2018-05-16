@@ -8,6 +8,7 @@ import { Ruta } from '../../models/ruta.model';
 import { Empresa } from '../../models/empresa.model';
 import { EmpresaService } from '../../services/empresa/empresa.service';
 import { nullSafeIsEquivalent } from '@angular/compiler/src/output/output_ast';
+import { STYLEMAP } from '../../config/config';
 
 @Component({
   selector: 'app-ruta',
@@ -20,7 +21,7 @@ export class RutaComponent implements OnInit {
 
   empresas: Empresa[] = [];
   ruta: Ruta = new Ruta('', '', null, null, null, null, '');
-  empresa: Empresa = new Empresa('','', '', '', '');
+  empresa: Empresa = new Empresa('','', '', '', '', '');
   textoAccion: string = 'crear una Ruta';
   lat: number;
   lng: number;
@@ -29,6 +30,7 @@ export class RutaComponent implements OnInit {
   lng_origen:number;
   lat_destino:number;
   lng_destino:number;
+  styleArray: any;
  
 
   constructor(public rutaService: RutaService,
@@ -36,7 +38,9 @@ export class RutaComponent implements OnInit {
               public vehiculoService: VehiculoService,
               public router: Router,
               public activatedRoute: ActivatedRoute,
-              public modalUploadService: ModalUploadService) { 
+              public modalUploadService: ModalUploadService) {
+                
+                this.styleArray = STYLEMAP;
 
                 this.ruta.empresa = '';
                 this.setCurrentPosition();
@@ -80,7 +84,13 @@ export class RutaComponent implements OnInit {
         .subscribe(ruta => {
           this.ruta = ruta;
           this.ruta.empresa = ruta.empresa._id;
+          this.lat_origen = ruta.lat_origen;
+          this.lng_origen = ruta.lng_origen;
+          this.lat_destino = ruta.lat_destino;
+          this.lng_destino = ruta.lng_destino;          
+          
           this.cambioEmpresa(this.ruta.empresa);
+          
         });
   }
 
@@ -123,7 +133,8 @@ export class RutaComponent implements OnInit {
 
 
   ActualizarCoordenadas(){
-    console.log("AQUI VOY");
+    this.rutaService.actualizarCoordenadas(this.ruta, this.lat_origen, this.lng_origen, this.lat_destino, this.lng_destino)
+        .subscribe();    
   }
  
 

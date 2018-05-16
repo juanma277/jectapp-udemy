@@ -5,6 +5,7 @@ export class Empresa {
         public tipo: string,
         public informacion: string,
         public descripcion: string,
+        public icono: string,       
         public lat?: number,
         public lng?: number,
         public img1?: string,

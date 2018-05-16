@@ -1,0 +1,156 @@
+<div class="row">
+    <div class="col-lg-7">
+        <div class="card card-body">
+            <h3 class="box-title m-b-0">Marcador: {{marcador.nombre}}</h3>
+            <p class="text-muted m-b-30 font-13"> Espacio para {{textoAccion}}. </p>
+            <div class="row">
+                <div class="col-sm-12 col-xs-12">
+                    <form #f="ngForm" ngNativeValidate (ngSubmit)="guardarMarcador(f.value)">
+                        <div class="form-group">
+                            <label>Nombre del Marcador</label>
+                            <input [(ngModel)]="marcador.nombre" name="nombre" type="text" class="form-control" placeholder="Nombre" required>
+                            <input [(ngModel)]="marcador._id" name="_id" type="hidden" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Icono</label>
+                            <select [(ngModel)]="marcador.icono" name="icono" class="form-control" required>
+                              <option value="">Seleccione</option>
+                              <option value="paradero.png">PARADERO</option>
+                              <option value="turismo.png">TURISMO</option>                              
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">
+                        <i class="fa fa-save"></i>
+                        {{boton}}
+                      </button>
+                        <a routerLink="/marcadores" class="btn btn-inverse waves-effect waves-light">
+                        CANCELAR
+                      </a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-5" *ngIf="boton==='ACTUALIZAR'">
+        <div class="card">
+            <div class="card-body" align="center">
+                <h4 class="card-title">Imagen 1</h4>
+
+                <img *ngIf="!imagenTemporal1" [src]="marcador.img1 | imagen:'marcadores'" class="w160">
+                <img *ngIf="imagenTemporal1" [src]="imagenTemporal1" class="w160">
+                <br>
+                <br>
+
+
+                <input (change)="seleccionImage($event.target.files[0], 1)" type="file">
+                <br>
+                <br>
+                <button (click)="cambiarImagen(marcador._id, 1)" [disabled]="!imagenSubir" type="button" class="btn btn-success waves-effect waves-light m-r-10">
+              <i class="fa fa-save"></i>
+                CAMBIAR IMAGEN
+          </button>
+
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body" align="center">
+                <h4 class="card-title">Imagen 2</h4>
+
+                <img *ngIf="!imagenTemporal2" [src]="marcador.img2 | imagen:'marcadores'" class="w160">
+                <img *ngIf="imagenTemporal2" [src]="imagenTemporal2" class="w160">
+                <br>
+                <br>
+
+                <input (change)="seleccionImage($event.target.files[0], 2)" type="file">
+                <br>
+                <br>
+                <button (click)="cambiarImagen(marcador._id, 2)" [disabled]="!imagenSubir" type="button" class="btn btn-success waves-effect waves-light m-r-10">
+                  <i class="fa fa-save"></i>
+                  CAMBIAR IMAGEN
+              </button>
+
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body" align="center">
+                <h4 class="card-title">Imagen 3</h4>
+
+                <img *ngIf="!imagenTemporal3" [src]="marcador.img3 | imagen:'marcadores'" class="w160">
+                <img *ngIf="imagenTemporal3" [src]="imagenTemporal3" class="w160">
+                <br>
+                <br>
+
+                <input (change)="seleccionImage($event.target.files[0], 3)" type="file">
+                <br>
+                <br>
+                <button (click)="cambiarImagen(marcador._id, 3)" [disabled]="!imagenSubir" type="button" class="btn btn-success waves-effect waves-light m-r-10">
+                      <i class="fa fa-save"></i>
+                      CAMBIAR IMAGEN
+                  </button>
+
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body" align="center">
+                <h4 class="card-title">Imagen 4</h4>
+
+                <img *ngIf="!imagenTemporal4" [src]="marcador.img4 | imagen:'marcadores'" class="w160">
+                <img *ngIf="imagenTemporal4" [src]="imagenTemporal4" class="w160">
+                <br>
+                <br>
+
+                <input (change)="seleccionImage($event.target.files[0], 4)" type="file">
+                <br>
+                <br>
+                <button (click)="cambiarImagen(marcador._id, 4)" [disabled]="!imagenSubir" type="button" class="btn btn-success waves-effect waves-light m-r-10">
+                          <i class="fa fa-save"></i>
+                             CAMBIAR IMAGEN
+                      </button>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-lg-7 ajustarCaja" *ngIf="boton==='ACTUALIZAR'">
+        <div class="card card-body">
+            <h4 class="box-title m-b-0">Selecciona la ubicación del Marcador</h4>
+            <agm-map [latitude]="marcador.lat" [longitude]="marcador.lng" [scrollwheel]="true" [zoom]="15" (mapClick)="placeMarker($event)" [styles]="styleArray">
+                <agm-marker [iconUrl]="'assets/images/markets/'+marcador.icono" [latitude]="marcador.lat" [longitude]="marcador.lng">
+                </agm-marker>
+                <agm-marker [label]="'Nueva Ubicacion'" [iconUrl]="'assets/images/markets/'+marcador.icono" [latitude]="lat_update" [longitude]="lng_update">
+
+                    <agm-info-window>
+                        <div class="card-body">
+                            <h4 class="card-title">{{marcador.nombre}}</h4>
+                            <div class="clearfix"></div>
+                        </div>
+                    </agm-info-window>
+
+                </agm-marker>
+            </agm-map>
+
+            <br><br>
+
+            <div class="form-group">
+                <label>Latitud Inicial</label>
+                <input [(ngModel)]="marcador.lat" name="lat" type="text" class="form-control" placeholder="Latitud" disabled>
+                <span class="badge badge-danger">{{lat_update}}</span>
+            </div>
+
+            <div class="form-group">
+                <label>Longitud Inicial</label>
+                <input [(ngModel)]="marcador.lng" name="lng" type="text" class="form-control" placeholder="Longitud" disabled>
+                <span class="badge badge-danger">{{lng_update}}</span>
+
+            </div>
+        </div>
+    </div>
+
+</div>

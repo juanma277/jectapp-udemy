@@ -26,6 +26,9 @@ import { EmpresasComponent } from './empresas/empresas.component';
 import { BarrioComponent } from './barrios/barrio.component';
 import { UsuarioComponent } from './usuarios/usuario.component';
 import { RutaComponent } from './rutas/ruta.component';
+import { Empresa1Component } from './empresas/empresa1.component';
+import { MarcadoresComponent } from './marcadores/marcadores.component';
+import { MarcadorComponent } from './marcadores/marcador.component';
 
 @NgModule({
     declarations:[
@@ -48,7 +51,10 @@ import { RutaComponent } from './rutas/ruta.component';
         EmpresasComponent,
         BarrioComponent,
         UsuarioComponent,
-        RutaComponent
+        RutaComponent,
+        Empresa1Component,
+        MarcadoresComponent,
+        MarcadorComponent
     ],
     exports:[
         DashboardComponent,

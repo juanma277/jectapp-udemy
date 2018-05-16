@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Barrio } from '../../models/barrio.model';
 import { BarriosService } from '../../services/barrio/barrios.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { STYLEMAP } from '../../config/config';
 
 @Component({
   selector: 'app-barrio',
@@ -19,10 +20,14 @@ export class BarrioComponent implements OnInit {
   lng_update: number = 0;
   boton:string = 'CREAR';
 
+  styleArray: any;
+
 
   constructor(public barriosService: BarriosService,
               public router: Router,
               public activatedRoute: ActivatedRoute ) { 
+
+                this.styleArray = STYLEMAP;
 
                 activatedRoute.params.subscribe(params =>{
                   let id = params['id'];

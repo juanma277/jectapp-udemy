@@ -31,7 +31,16 @@ export class ImagenPipe implements PipeTransform {
       break;
 
       case 'empresas':
-        url += '/empresas/' + img;        
+        url += '/empresas/' + img;  
+      break;
+      
+      case 'iconos':
+        url += '/iconos/' + img;
+      break;  
+
+      case 'marcadores':
+        url += '/marcador/' + img;
+      break;  
       
       default:
         break;

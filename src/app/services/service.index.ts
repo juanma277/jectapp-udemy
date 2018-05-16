@@ -13,6 +13,8 @@ export { ChatService } from "./chat/chat.service";
 export { BarriosService } from "./barrio/barrios.service";
 export { UbicacionService } from "./ubicacion/ubicacion.service";
 export { EmpresaService } from "./empresa/empresa.service";
+export { MarcadorService } from "./marcador/marcador.service";
+
 
 
 

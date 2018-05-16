@@ -21,7 +21,10 @@ import { PagesComponent } from './pages/pages.component';
 import { PrincipalComponent } from './principal/principal.component';
 import { AgmCoreModule } from '@agm/core';
 import { TypeaheadModule } from 'ngx-bootstrap';
+import { PipesModule } from './pipes/pipes.module';
+import { AgmDirectionModule } from 'agm-direction';
 //import { TypeaheadModule } from 'ngx-type-ahead';
+
 
 
 @NgModule({
@@ -39,6 +42,8 @@ import { TypeaheadModule } from 'ngx-bootstrap';
     ReactiveFormsModule,
     ServiceModule,
     ShareModule,
+    PipesModule,
+    AgmDirectionModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAGgspWVCEGTGTKSUTbymXM2Cs2AdV6FEI'
     }),

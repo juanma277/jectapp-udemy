@@ -10,8 +10,6 @@ import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
 import { SubirArchivoService } from '../subir-archivo/subir-archivo.service';
 
-
-
 @Injectable()
 export class UsuarioService {
 
@@ -175,8 +173,13 @@ export class UsuarioService {
    }
 
    cargarUsuarios(desde:number = 0){
-
     let url = URL_SERVICIOS + '/usuario?desde='+desde;
+    return this.http.get(url);
+
+   }
+
+   cargarUsuariosAll(){
+    let url = URL_SERVICIOS + '/usuario/all'
     return this.http.get(url);
 
    }

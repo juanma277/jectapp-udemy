@@ -20,6 +20,9 @@ import { BarriosComponent } from './barrios/barrios.component';
 import { BarrioComponent } from './barrios/barrio.component';
 import { UsuarioComponent } from './usuarios/usuario.component';
 import { RutaComponent } from './rutas/ruta.component';
+import { Empresa1Component } from './empresas/empresa1.component';
+import { MarcadoresComponent } from './marcadores/marcadores.component';
+import { MarcadorComponent } from './marcadores/marcador.component';
 
 const pagesRoutes: Routes = [
             { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
@@ -74,7 +77,13 @@ const pagesRoutes: Routes = [
                 path: 'empresas', 
                 component: EmpresasComponent, 
                 canActivate: [ AdminGuard ], 
-                data:{titulo: 'Mantenimientos de Empresas'}
+                data:{titulo: 'Mantenimiento de Empresas'}
+            },
+            { 
+                path: 'empresa/:id', 
+                component: Empresa1Component, 
+                canActivate: [ AdminGuard ], 
+                data:{titulo: 'Crear/Actualizar Empresa'}
             },
             { 
                 path: 'barrios', 
@@ -87,6 +96,18 @@ const pagesRoutes: Routes = [
                 component: BarrioComponent, 
                 canActivate: [ AdminGuard ], 
                 data:{titulo: 'Crear/Actualizar Barrio'}
+            },            
+            { 
+                path: 'marcadores', 
+                component: MarcadoresComponent, 
+                canActivate: [ AdminGuard ], 
+                data:{titulo: 'Mantenimiento de Marcadores'}
+            },
+            { 
+                path: 'marcador/:id', 
+                component: MarcadorComponent, 
+                canActivate: [ AdminGuard ], 
+                data:{titulo: 'Crear/Actualizar Marcadores'}
             }
     
 ];

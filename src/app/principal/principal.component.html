@@ -225,19 +225,67 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-body">
-                            <agm-map [latitude]="lat" [longitude]="lng" [scrollwheel]="true" [zoom]="zoom">
+                            <agm-map [latitude]="lat" [longitude]="lng" [scrollwheel]="true" [zoom]="zoom" [styles]="styleArray">
                                 <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
 
-                                <ng-container>
+                                <agm-direction *ngIf="dir" [origin]="dir.origin" [destination]="dir.destination" [visible]="show"></agm-direction>
+
+                                <!--
+
+                                    <ng-container>
                                     <agm-polyline [strokeColor]="'#3393FF'" *ngIf="mostrarRutas">
                                         <agm-polyline-point [latitude]="lat_origen" [longitude]="lng_origen">
+
                                         </agm-polyline-point>
 
                                         <agm-polyline-point [latitude]="lat_destino" [longitude]="lng_destino">
                                         </agm-polyline-point>
 
+
+
                                     </agm-polyline>
                                 </ng-container>
+
+
+                                -->
+
+
+                                <agm-marker *ngFor="let empresa of empresas" [iconUrl]="'assets/images/markets/'+empresa.icono" [latitude]="empresa.lat" [longitude]="empresa.lng">
+
+                                    <agm-info-window>
+                                        <div class="card-body">
+                                            <h4 class="card-title">{{empresa.nombre}}</h4>
+                                            <h6 class="card-title">{{empresa.informacion}}</h6>
+                                            <div class="clearfix"></div>
+                                            <img [src]="empresa.img1 | imagen:'empresas'" width="90">
+                                            <img [src]="empresa.img2 | imagen:'empresas'" width="90">
+                                            <img [src]="empresa.img3 | imagen:'empresas'" width="90">
+                                            <img [src]="empresa.img4 | imagen:'empresas'" width="90">
+                                            <br><br>
+                                            <h6 class="card-title">{{empresa.descripcion}}</h6>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </agm-info-window>
+
+                                </agm-marker>
+
+
+                                <agm-marker *ngFor="let marcador of marcadores" [iconUrl]="'assets/images/markets/'+marcador.icono" [latitude]="marcador.lat" [longitude]="marcador.lng">
+
+                                    <agm-info-window>
+                                        <div class="card-body">
+                                            <h4 class="card-title">{{marcador.nombre}}</h4>
+                                            <div class="clearfix"></div>
+                                            <img [src]="marcador.img1 | imagen:'marcadores'" width="90">
+                                            <img [src]="marcador.img2 | imagen:'marcadores'" width="90">
+                                            <img [src]="marcador.img3 | imagen:'marcadores'" width="90">
+                                            <img [src]="marcador.img4 | imagen:'marcadores'" width="90">
+                                            <br><br>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </agm-info-window>
+
+                                </agm-marker>
                             </agm-map>
 
                         </div>

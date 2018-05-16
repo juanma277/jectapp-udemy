@@ -1,0 +1,99 @@
+<div class=row>
+    <div class="col-md-4">
+
+        <div class="card card-body">
+            <h3 class="box-title m-b-0">Empresa: {{empresa.nombre}}</h3>
+            <p class="text-muted m-b-30 font-13"> Espacio para {{textoAccion}}. </p>
+            <div class="row">
+                <div class="col-sm-12 col-xs-12">
+                    <form #f="ngForm" ngNativeValidate (ngSubmit)="guardarEmpresa(f.value)">
+                        <div class="form-group">
+                            <label>Nombre de la Empresa</label>
+                            <input [(ngModel)]="empresa.nombre" name="nombre" type="text" class="form-control" placeholder="Nombre" required>
+                            <input [(ngModel)]="empresa._id" name="_id" type="hidden" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Usuario</label>
+                            <select [(ngModel)]="empresa.usuario" name="usuario" class="form-control" required>
+                            <option value="">Seleccione</option>
+                            <option *ngFor="let usuario of usuarios" value="{{usuario._id}}">{{usuario.nombre}}</option>
+                          </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Tipo</label>
+                            <select [(ngModel)]="empresa.tipo" name="tipo" class="form-control" required>
+                              <option value="">Seleccione</option>
+                              <option value="TRANSPORT">Transporte</option>
+                              <option value="BUSINESS">Negocio</option>                              
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Información</label>
+                            <textarea [(ngModel)]="empresa.informacion" name="informacion" type="text" class="form-control" placeholder="Información de la empresa" required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Descripción</label>
+                            <textarea [(ngModel)]="empresa.descripcion" name="descripcion" type="text" class="form-control" placeholder="Descripción de la empresa" required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">
+                        <i class="fa fa-save"></i>
+                        {{boton}}
+                      </button>
+                        <a routerLink="/empresas" class="btn btn-inverse waves-effect waves-light">
+                        CANCELAR
+                      </a>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class=col-md-8 *ngIf="boton === 'ACTUALIZAR'">
+        <div class="card card-body">
+            <h4 class="box-title m-b-0">Selecciona la ubicación de la empresa</h4>
+
+
+            <agm-map [latitude]="empresa.lat" [longitude]="empresa.lng" [scrollwheel]="true" [zoom]="15" (mapClick)="placeMarker($event)" [styles]="styleArray">
+                <agm-marker [iconUrl]="'assets/images/markets/'+empresa.icono" [latitude]="empresa.lat" [longitude]="empresa.lng">
+                </agm-marker>
+                <agm-marker [label]="'Nueva Ubicacion'" [iconUrl]="'assets/images/markets/'+empresa.icono" [latitude]="lat_update" [longitude]="lng_update">
+
+                    <agm-info-window>
+                        <div class="card-body">
+                            <h4 class="card-title">{{empresa.nombre}}</h4>
+                            <div class="clearfix"></div>
+                        </div>
+                    </agm-info-window>
+
+                </agm-marker>
+            </agm-map>
+
+            <br><br>
+
+            <div class="form-group">
+                <label>Latitud Inicial</label>
+                <input [(ngModel)]="empresa.lat" name="lat" type="text" class="form-control" placeholder="Latitud" disabled>
+                <span class="badge badge-danger">{{lat_update}}</span>
+            </div>
+
+            <div class="form-group">
+                <label>Longitud Inicial</label>
+                <input [(ngModel)]="empresa.lng" name="lng" type="text" class="form-control" placeholder="Longitud" disabled>
+                <span class="badge badge-danger">{{lng_update}}</span>
+
+
+            </div>
+
+
+
+        </div>
+
+    </div>
+
+</div>

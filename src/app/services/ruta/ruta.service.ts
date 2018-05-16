@@ -67,6 +67,19 @@ export class RutaService {
                .map((resp:any) => resp.ruta );
   }
 
+  actualizarCoordenadas(ruta:Ruta, lat_origen:number, lng_origen:number, lat_destino:number, lng_destino:number){
+    let url = URL_SERVICIOS + '/ruta/coordenadas/'+ ruta._id;
+    url += '?token=' + this.usuarioService.token;
+
+    return this.http.put(url, {'lat_origen':lat_origen, 'lng_origen':lng_origen, 'lat_destino':lat_destino, 'lng_destino':lng_destino })
+                .map((resp:any) => {
+                  swal('Ruta actualizada', 'La ruta '+ruta.nombre+' ha sido actualizada.', 'success');
+                  return resp.ruta;          
+                });
+    
+    
+  }
+
   buscarRuta(termino: string){
     let url = URL_SERVICIOS + '/busqueda/coleccion/rutas/'+termino;
     return this.http.get(url)
@@ -85,11 +98,8 @@ export class RutaService {
   }
 
   buscarRutaOrigenDestino(lat_origen: number, lng_origen:number, lat_destino:number, lng_destino:number){
-
     let url = URL_SERVICIOS +'/ruta/'+ lat_origen +'/' + lng_origen + '/' + lat_destino + '/' + lng_destino;
     return this.http.get(url);
-
-
   }
 
 

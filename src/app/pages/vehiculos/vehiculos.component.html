@@ -38,7 +38,6 @@
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th></th>
                             <th>Imagen</th>
                             <th>Nombre</th>
                             <th>Ruta</th>
@@ -47,7 +46,6 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let vehiculo of vehiculos">
-                            <td>{{1-0}}</td>
                             <td><img (click)="actualizarImagen(vehiculo)" [src]="vehiculo.img | imagen:'vehiculos'" class="img-50 pointer"></td>
                             <td>
                                 {{vehiculo.nombre}}

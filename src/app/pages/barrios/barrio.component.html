@@ -33,7 +33,7 @@
             <h4 class="box-title m-b-0">Selecciona la ubicación del barrio</h4>
 
 
-            <agm-map [latitude]="barrio.lat" [longitude]="barrio.lng" [scrollwheel]="true" [zoom]="15" (mapClick)="placeMarker($event)">
+            <agm-map [latitude]="barrio.lat" [longitude]="barrio.lng" [scrollwheel]="true" [zoom]="15" (mapClick)="placeMarker($event)" [styles]="styleArray">
                 <agm-marker [iconUrl]="'assets/images/markets/barrio.png'" [latitude]="barrio.lat" [longitude]="barrio.lng">
                 </agm-marker>
                 <agm-marker [label]="'Nueva Ubicacion'" [iconUrl]="'assets/images/markets/barrio.png'" [latitude]="lat_update" [longitude]="lng_update">

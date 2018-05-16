@@ -43,6 +43,10 @@
                                 <i class="fa fa-save"></i>
                               </button>
 
+                                <button [routerLink]="['/ruta',ruta._id ]" class="btn btn-warning">
+                                <i class="fa fa-edit"></i>
+                              </button>
+
                                 <button (click)="borrarRuta(ruta)" class="btn btn-danger">
                                   <i class="fa fa-trash-o"></i>
                                 </button>

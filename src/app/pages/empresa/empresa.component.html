@@ -46,8 +46,8 @@
                 <div class="card-body">
                     <h6 class="card-subtitle">Edita la ubicación de tu Empresa</h6>
 
-                    <agm-map [latitude]="data.lat" [longitude]="data.lng" [scrollwheel]="true" [zoom]="zoom" (mapClick)="placeMarker($event)">
-                        <agm-marker [iconUrl]="'assets/images/markets/tienda.png'" [latitude]="data.lat" [longitude]="data.lng">
+                    <agm-map [latitude]="data.lat" [longitude]="data.lng" [scrollwheel]="true" [zoom]="zoom" (mapClick)="placeMarker($event)" [styles]="styleArray">
+                        <agm-marker [iconUrl]="'assets/images/markets/transporte.png'" [latitude]="data.lat" [longitude]="data.lng">
 
                             <agm-info-window>
                                 <div class="card-body">
@@ -95,7 +95,6 @@
 
 
             </div>
-
 
         </div>
 
@@ -197,9 +196,9 @@
                 <div class="card-body">
                     <h6 class="card-subtitle">Selecciona la ubicación de tu Empresa</h6>
 
-                    <agm-map [latitude]="lat" [longitude]="lng" [scrollwheel]="true" [zoom]="zoom" (mapClick)="placeMarker($event)">
+                    <agm-map [latitude]="lat" [longitude]="lng" [scrollwheel]="true" [zoom]="zoom" (mapClick)="placeMarker($event)" [styles]="styleArray">
                         <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
-                        <agm-marker [iconUrl]="'assets/images/markets/tienda.png'" [latitude]="lat_update" [longitude]="lng_update">
+                        <agm-marker [iconUrl]="'assets/images/markets/transporte.png'" [latitude]="lat_update" [longitude]="lng_update">
 
                         </agm-marker>
                     </agm-map>

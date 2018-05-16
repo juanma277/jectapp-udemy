@@ -6,6 +6,11 @@ import { RutaService } from '../services/ruta/ruta.service';
 import { Ruta } from '../models/ruta.model';
 import { MapsAPILoader } from '@agm/core';
 import { Coordenada } from '../models/coordenada.model';
+import { Empresa } from '../models/empresa.model';
+import { EmpresaService } from '../services/empresa/empresa.service';
+import { MarcadorService } from '../services/marcador/marcador.service';
+import { Marcador } from '../models/marcador.model';
+import { STYLEMAP } from '../config/config';
 
 
 declare function init_plugins();
@@ -18,6 +23,7 @@ declare function init_plugins();
 export class PrincipalComponent implements OnInit {
 
   myForm: FormGroup;
+  styleArray: any;
  
   lat: number = 0;
   lng: number = 0;
@@ -27,6 +33,8 @@ export class PrincipalComponent implements OnInit {
   barrios: Barrio[] = [];
   barrioOrigen: Barrio[] = [];
   barrioDestino: Barrio[] = [];
+  empresas: Empresa[] = [];
+  marcadores: Marcador[] = [];
 
   rutas: Ruta[] = [];
   totalRegistros: number = 0;
@@ -35,7 +43,7 @@ export class PrincipalComponent implements OnInit {
   resultado: boolean = false;
   
   mostrarRutas: boolean = false;
-
+  show: boolean = false;
   data_origen: Coordenada[] = [];
   data_destino: Coordenada[] = [];
   
@@ -44,18 +52,38 @@ export class PrincipalComponent implements OnInit {
   lat_destino: number;
   lng_destino: number;
 
+  dir = undefined;
+
   constructor(public barriosService: BarriosService,
               public rutasService: RutaService,
               private mapsAPILoader: MapsAPILoader,
               private ngZone: NgZone,
-              private formBuilder: FormBuilder ) { 
+              private formBuilder: FormBuilder,
+              private empresaService: EmpresaService,
+              private marcadorService: MarcadorService ) { 
+      
+      this.styleArray = STYLEMAP;
       this.setCurrentPosition();
+      this.obtenerEmpresas();
+      this.obtenerMarcadores();
   }
 
   ngOnInit() {
     init_plugins();
     this.initializeForm();
     this.cargarBarrios();
+  }
+
+  obtenerEmpresas(){
+    this.empresaService.cargarEmpresasTodo().subscribe((resp:any)=>{
+      this.empresas = resp.empresas;
+    });
+  }
+
+  obtenerMarcadores(){
+    this.marcadorService.cargarTodos().subscribe((resp:any)=>{
+      this.marcadores = resp.marcadores;
+    });
   }
 
 
@@ -106,6 +134,8 @@ export class PrincipalComponent implements OnInit {
     this.cargando = true;
     this.mostrarRutas = false;
     this.zoom = 15;
+    this.show = false;
+    
 
     this.barriosService.buscarCoordenadasOrigen(origen)
         .subscribe(()=>{
@@ -153,20 +183,12 @@ export class PrincipalComponent implements OnInit {
               });
           
         });
-
-    
-
-
-    
-
-
-    
-    
   }
 
   mostrarRuta(lat_origen: number, lng_origen: number, lat_destino: number, lng_destino: number){
     
     this.mostrarRutas = true;
+    this.show = true;
 
     this.lat_origen = lat_origen;
     this.lng_origen = lng_origen;
@@ -174,6 +196,11 @@ export class PrincipalComponent implements OnInit {
     this.lng_destino = lng_destino;
 
     this.zoom = 13;
+
+    this.dir = {
+      origin: { lat: this.lat_origen, lng: lng_origen },
+      destination: { lat: this.lat_destino, lng: this.lng_destino }
+    }
 
   }
 
@@ -183,6 +210,14 @@ export class PrincipalComponent implements OnInit {
       destino: '',
     });
 
+  }
+
+
+  getDirection() {
+    this.dir = {
+      origin: { lat: 24.799448, lng: 120.979021 },
+      destination: { lat: 24.799524, lng: 120.975017 }
+    }
   }
 
 }

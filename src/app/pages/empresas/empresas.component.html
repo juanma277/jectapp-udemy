@@ -1,3 +1,83 @@
-<p>
-  empresas works!
-</p>
+<div class="row animated bounceInUp">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <input #input (keyup)="buscarEmpresa(input.value)" type="text" class="form-control" placeholder="Buscar empresa ...">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <div class="text-right">
+                    <button [routerLink]="['/empresa','nuevo']" type="button" class="btn waves-effect waves-light btn-rounded btn-primary">
+                          <i class="fa fa-plus"> Crear Empresa</i>
+                  </button>
+                </div>
+
+                <h3 class="card-title">Empresas registradas(<small>{{totalRegistros}}</small>)</h3>
+
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Imagen</th>
+                            <th>Empresa</th>
+                            <th>Información</th>
+                            <th>Descripción</th>
+                            <th>Tipo</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let empresa of empresas">
+                            <td><img [src]="empresa.img1 | imagen:'empresas'" class="img-50"></td>
+                            <td>
+                                <input [(ngModel)]="empresa.nombre" name="nombre" type="text" class="form-control" required placeholder="Nombre">
+                            </td>
+                            <td>
+                                <textarea [(ngModel)]="empresa.informacion" name="informacion" type="text" class="form-control" required placeholder="información"></textarea>
+                            </td>
+                            <td>
+                                <textarea [(ngModel)]="empresa.descripcion" name="descripcion" type="text" class="form-control" required placeholder="Descripción"></textarea>
+                            </td>
+                            <td>
+                                <span class="badge badge-warning" *ngIf="empresa.tipo === 'TRANSPORT'">TRANSPORTE</span>
+                                <span class="badge badge-warning" *ngIf="empresa.tipo === 'BUSINESS'">NEGOCIO</span>
+                            </td>
+                            <td>
+                                <button (click)="guardarEmpresa(empresa)" class="btn btn-success">
+                              <i class="fa fa-save"></i>
+                            </button>
+
+                                <button [routerLink]="['/empresa',empresa._id ]" class="btn btn-warning">
+                              <i class="fa fa-edit"></i>
+                            </button>
+
+                                <button (click)="borrarEmpresa(empresa)" class="btn btn-danger">
+                                <i class="fa fa-trash-o"></i>
+                              </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <button (click)="cambiarDesde(-5)" class="btn btn-secondary">
+                      Anterior
+              </button>
+
+                <button (click)="cambiarDesde(5)" class="btn btn-secondary">
+                      Siguiente                    
+              </button>
+
+
+            </div>
+        </div>
+    </div>
+</div>
