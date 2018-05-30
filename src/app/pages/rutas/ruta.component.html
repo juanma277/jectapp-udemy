@@ -6,31 +6,48 @@
             <p class="text-muted m-b-30 font-13"> Espacio para {{textoAccion}}. </p>
             <div class="row">
                 <div class="col-sm-12 col-xs-12">
-                    <form #f="ngForm" ngNativeValidate (ngSubmit)="guardarRuta(f)">
-                        <div class="form-group">
-                            <label>Nombre de la Ruta</label>
-                            <input [(ngModel)]="ruta.nombre" name="nombre" type="text" class="form-control" placeholder="Nombre" required>
-                        </div>
 
-                        <div class="form-group">
-                            <label>Empresa</label>
-                            <select (change)="cambioEmpresa($event.target.value)" [(ngModel)]="ruta.empresa" name="ruta" class="form-control" required>
-                              <option value="" selected>Seleccione la Empresa</option>
-                              <option *ngFor="let empresa of empresas" [value]="empresa._id">
-                                {{empresa.nombre}}
-                              </option>
-                            </select>
+                        <form #f="ngForm" ngNativeValidate (ngSubmit)="guardarRuta(f)">
+                                <div class="form-group">
+                                    <label>Nombre de la Ruta</label>
+                                    <input [(ngModel)]="ruta.nombre" name="nombre" type="text" class="form-control" placeholder="Nombre" required>
+                                </div>
+        
+                                <div class="form-group">
+                                    <label>Empresa</label>
+                                    <select (change)="cambioEmpresa($event.target.value)" [(ngModel)]="ruta.empresa" name="ruta" class="form-control" required>
+                                      <option value="" selected>Seleccione la Empresa</option>
+                                      <option *ngFor="let empresa of empresas" [value]="empresa._id">
+                                        {{empresa.nombre}}
+                                      </option>
+                                    </select>
+                                </div>
 
-                        </div>
-
-                        <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">
-                          <i class="fa fa-save"></i>
-                          GUARDAR
-                        </button>
-                        <a routerLink="/rutas" class="btn btn-inverse waves-effect waves-light">
-                          CANCELAR
-                        </a>
-                    </form>
+                                <div class="form-group">
+                                    <label>Barrio(s)</label>
+                                    <br>
+                                    <div class="row">
+                                        <div *ngFor="let barrio of barriosArray" class="col-4" >
+                                            <input 
+                                                    type="checkbox" 
+                                                    id="{{barrio._id}}" 
+                                                    [checked] = "barrio.check"
+                                                    name="barrios"
+                                                    (change)="logCheckbox(cb1)"
+                                                    class="filled-in chk-col-green"/>
+                                            <label for="{{barrio._id}}">{{barrio.nombre}}</label>
+                                        </div>
+                                    </div>
+                                </div>
+        
+                                <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">
+                                  <i class="fa fa-save"></i>
+                                  GUARDAR
+                                </button>
+                                <a routerLink="/rutas" class="btn btn-inverse waves-effect waves-light">
+                                  CANCELAR
+                                </a>
+                            </form>
                 </div>
             </div>
         </div>

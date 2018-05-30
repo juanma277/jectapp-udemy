@@ -35,8 +35,8 @@ export class RutaService {
   }
 
   guardarRuta(ruta: Ruta){
-    let url = URL_SERVICIOS + '/ruta/';  
-
+    let url = URL_SERVICIOS + '/ruta/'; 
+  
     if (ruta._id){
       //Actualizando
       url += '/' +ruta._id;

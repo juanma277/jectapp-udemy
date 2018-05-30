@@ -9,6 +9,7 @@ export class Ruta {
         public lng_destino: number,
         public empresa: string,
         public img?: string,
+        public barrios?: string,        
         public _id?: string
     ) { }
 
