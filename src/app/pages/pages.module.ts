@@ -29,6 +29,7 @@ import { RutaComponent } from './rutas/ruta.component';
 import { Empresa1Component } from './empresas/empresa1.component';
 import { MarcadoresComponent } from './marcadores/marcadores.component';
 import { MarcadorComponent } from './marcadores/marcador.component';
+import { ChecklistModule } from 'angular-checklist';
 
 @NgModule({
     declarations:[
@@ -71,7 +72,8 @@ import { MarcadorComponent } from './marcadores/marcador.component';
         PipesModule,
         AgmCoreModule.forRoot({
             apiKey: 'AIzaSyAGgspWVCEGTGTKSUTbymXM2Cs2AdV6FEI'
-          })
+          }),
+        ChecklistModule
     ]
 })
 export class PagesModule { }

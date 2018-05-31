@@ -28,12 +28,12 @@ export class DashboardComponent implements OnInit {
 
   styleArray: any;
 
-  constructor(private chatService: ChatService,
+  constructor(//private chatService: ChatService,
               private empresaService: EmpresaService,
               private marcadorService: MarcadorService) { 
     
     this.styleArray = STYLEMAP;
-    this.sockeIo();
+    //this.sockeIo();
     this.obtenerEmpresas();
     this.obtenerMarcadores();
 

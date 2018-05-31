@@ -45,9 +45,11 @@ export class RutaComponent implements OnInit {
   styleArray: any;
   rutaBaariosArray: Array<String> = [];
   barriosArray: Barrio[] = [];
+  barriosList: Barrio[] = [];  
   barriosArrayNew: Barrio[] = [];
   nombresBarrios: Array<any> = [];
-  
+  checked: any[] =[];
+  arraySelects = new Object();
   
 
   constructor(public rutaService: RutaService,
@@ -171,20 +173,29 @@ export class RutaComponent implements OnInit {
     if(forma.invalid){
       return;
     }
-    /*
+    
     this.rutaService.guardarRuta(this.ruta)
         .subscribe(ruta=>{
           this.ruta._id = ruta._id;
           this.router.navigate(['/ruta', ruta._id]);
-        });*/
-
-    console.log(forma);
+        });
     
   }
 
-
-  logCheckbox(element:string) {
-    console.log(element);
+  updateList($event) {
+    //const barrio = new Barrio ($event.path[0].id, null, null, null, $event.srcElement.checked);
+    if (this.checked.length == 0) {
+      this.arraySelects[$event.path[0].id] = $event.srcElement.checked;
+    } else {
+      for(var clave in this.arraySelects) {
+        if (typeof this.arraySelects[clave] !== 'undefined') {
+          this.arraySelects[$event.path[0].id] = $event.srcElement.checked;
+        }
+      }
+    }
+    console.log(this.arraySelects);
+    //this.checked.push(barrio);    
+    //console.log(this.checked[0]['Pandiguando']);
   }
 
   cambiarFoto(){
