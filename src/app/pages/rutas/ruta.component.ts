@@ -6,7 +6,7 @@ import { ModalUploadService } from '../../components/modal-upload/modal-upload.s
 import { Ruta } from '../../models/ruta.model';
 import { Empresa } from '../../models/empresa.model';
 import { EmpresaService } from '../../services/empresa/empresa.service';
-import { nullSafeIsEquivalent } from '@angular/compiler/src/output/output_ast';
+import { nullSafeIsEquivalent, THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { STYLEMAP } from '../../config/config';
 import { Barrio } from '../../models/barrio.model';
 import { BarriosService } from '../../services/service.index';
@@ -37,7 +37,7 @@ export class RutaComponent implements OnInit {
   textoAccion: string = 'crear una Ruta';
   lat: number;
   lng: number;
-  zoom: number;
+  zoom: number = 15;
   lat_origen:number;
   lng_origen:number;
   lat_destino:number;
@@ -50,6 +50,8 @@ export class RutaComponent implements OnInit {
   nombresBarrios: Array<any> = [];
   checked: any[] =[];
   arraySelects = new Object();
+  
+  adicion:boolean = false;
   
 
   constructor(public rutaService: RutaService,
@@ -73,6 +75,11 @@ export class RutaComponent implements OnInit {
                   if(id !== 'nuevo'){
                     this.cargarRuta(id);
                     this.textoAccion = 'editar los datos de la Ruta';
+                  }else{
+                    this.barrioService.cargarBarrios()
+                      .subscribe((resp:any)=>{
+                        this.barriosArray = resp;
+                      });
                   }
                 });
 
@@ -80,23 +87,11 @@ export class RutaComponent implements OnInit {
 
   ngOnInit() {
 
-    //INICIALIZANDO FORMULARIO
-    this.rForm = this.fb.group({
-      'nombre' : [null, Validators.required],
-      'empresa' : ['', Validators.required],
-      'barrio' : [null, Validators.required]                  
-    });
-
     this.empresaService.cargarEmpresasAll()
         .subscribe((resp:any)=>{
           this.empresas = resp.empresas;
         });
-        
-    this.barrioService.cargarBarrios()
-        .subscribe((resp:any)=>{
-          this.barrios = resp;
-        });
-        
+                
     this.modalUploadService.notificacion
         .subscribe(resp =>{
           this.ruta.img = resp.ruta.img;
@@ -123,15 +118,11 @@ export class RutaComponent implements OnInit {
           this.ruta.barrios = ruta.barrios;
           JSON.stringify(this.ruta.barrios);
           this.rutaBaariosArray = ((ruta.barrios).split(","));
+          console.log(this.rutaBaariosArray);
           this.lat_origen = ruta.lat_origen;
           this.lng_origen = ruta.lng_origen;
           this.lat_destino = ruta.lat_destino;
           this.lng_destino = ruta.lng_destino;
-
-          this.rForm = this.fb.group({
-            'nombre' : [this.ruta.nombre, Validators.required],
-            'empresa' : [ this.ruta.empresa, Validators.required]
-          });
 
           this.barrioService.cargarBarrios()
               .subscribe((resp:any)=>{
@@ -168,17 +159,43 @@ export class RutaComponent implements OnInit {
 
   }
 
+  modificarBarrios(){
+    this.adicion = true;
+  }
 
   guardarRuta(forma: NgForm){
-    if(forma.invalid){
+
+    let arrayBarrioFinal = new Object();
+    let arrayBarrioInicial = new Object();
+
+    for (let dato of this.rutaBaariosArray){
+      arrayBarrioInicial[dato] = true;
+    }
+
+    for (var y = 0; y < this.rutaBaariosArray.length; y++){
+      for(var clave in this.arraySelects) {
+        if(this.rutaBaariosArray[y] != clave){
+          let letra = this.rutaBaariosArray[y];
+          arrayBarrioFinal[letra] = true;
+        }
+      }
+    }
+
+    for(var clave in this.arraySelects) {
+      if (this.arraySelects[clave] == true) {
+        arrayBarrioFinal[clave] = this.arraySelects[clave];
+      }
+    }
+    console.log(arrayBarrioFinal);
+    /*if(forma.invalid){
       return;
     }
-    
+
     this.rutaService.guardarRuta(this.ruta)
         .subscribe(ruta=>{
           this.ruta._id = ruta._id;
           this.router.navigate(['/ruta', ruta._id]);
-        });
+        });*/
     
   }
 
@@ -193,9 +210,7 @@ export class RutaComponent implements OnInit {
         }
       }
     }
-    console.log(this.arraySelects);
-    //this.checked.push(barrio);    
-    //console.log(this.checked[0]['Pandiguando']);
+    //console.log(this.arraySelects);   
   }
 
   cambiarFoto(){

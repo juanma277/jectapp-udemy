@@ -40,6 +40,7 @@
                         <tr>
                             <th>Icono</th>
                             <th>Nombre</th>
+                            <th>Descripción</th>                            
                             <th>Latitud</th>
                             <th>longitud</th>
                         </tr>
@@ -52,6 +53,9 @@
                             </td>
                             <td>
                                 <input [(ngModel)]="marcador.nombre" name="nombre" type="text" class="form-control" required placeholder="Nombre">
+                            </td>
+                            <td>
+                                <textarea [(ngModel)]="marcador.descripcion" name="descripcion" class="form-control" required placeholder="Descripción"></textarea>
                             </td>
                             <td>
                                 <input [(ngModel)]="marcador.lat" name="lat" type="text" class="form-control" required placeholder="Latitud">

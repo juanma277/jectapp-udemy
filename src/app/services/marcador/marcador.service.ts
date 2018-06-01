@@ -53,7 +53,7 @@ cargarMarcadores(desde:number = 0){
     url += marcador._id;
     url += '?token=' + this.usuarioService.token;
 
-    return this.http.put(url, {'nombre': marcador.nombre, 'icono': marcador.icono, 'lat': lat, 'lng': lng})
+    return this.http.put(url, {'nombre': marcador.nombre, 'icono': marcador.icono, 'descripcion': marcador.descripcion, 'lat': lat, 'lng': lng})
                .map((resp:any)=> {
                  swal('Marcador actualizado','El Marcador '+ marcador.nombre + ' ha sido actualizado', 'success');
                  return resp.marcador;
@@ -63,7 +63,7 @@ cargarMarcadores(desde:number = 0){
         url = URL_SERVICIOS + '/marcador';
         url += '?token=' + this.usuarioService.token;
 
-        return this.http.post(url, {'nombre': marcador.nombre, 'icono': marcador.icono, 'lat': lat, 'lng': lng})
+        return this.http.post(url, {'nombre': marcador.nombre, 'icono': marcador.icono, 'descripcion': marcador.descripcion, 'lat': lat, 'lng': lng})
           .map((resp:any) => {
             swal('Marcador creado', 'El marcador '+marcador.nombre+' ha sido creado.', 'success');
             return resp.marcador;

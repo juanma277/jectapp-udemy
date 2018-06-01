@@ -23,28 +23,33 @@
                                     </select>
                                 </div>
 
-                                <!--
-
-                                <div class="form-group">
-                                    <label>Barrio(s)</label>
-                                    <br>
+                                <div class="form-group" *ngIf="adicion === false">
                                     <div class="row">
-                                        <div class="col-4" *ngFor="let barrio of barriosArray" >
-                                            <input 
-                                                    type="checkbox" 
-                                                    id="{{barrio.nombre}}" 
-                                                    [checked] = "barrio.check"
-                                                    name="barrios"
-                                                    class="filled-in chk-col-green"/>
-                                            <label for="{{barrio.nombre}}">{{barrio.nombre}}</label>
+                                        <div class="col">
+                                                <label>Barrio(s)</label> 
                                         </div>
+                                        <div>
+                                                <button type="button" 
+                                                        class="btn btn-rounded btn-xs btn-outline-danger"
+                                                        (click)="modificarBarrios()">Modificar</button>
+
+                                        </div>
+
                                     </div>
-                                </div>
+                                                                                
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <ul>
+                                                <li *ngFor="let barrio of rutaBaariosArray">
+                                                        {{barrio}}
+                                                </li>
+                                            </ul>    
+                                        </div>
+                                        
+                                    </div>
+                            </div>
 
-                                -->
-
-
-                                <div class="form-group">
+                                <div class="form-group" *ngIf="adicion">
                                         <label>Barrio(s)</label>
                                         <br>
                                         <div class="row">
@@ -53,8 +58,7 @@
                                                     id="{{barrio.nombre}}"
                                                     [(checklist)]="ruta.barrios"
                                                     [checklistValue]="barrio.nombre"
-                                                    (change)="updateList($event)" />
-                                            
+                                                    (change)="updateList($event)" />              
                                             <label for="{{barrio.nombre}}">{{barrio.nombre}}</label>
                                             </div>
                                         </div>

@@ -28,7 +28,7 @@ export class PrincipalComponent implements OnInit {
   lat: number = 0;
   lng: number = 0;
 
-  zoom: number;
+  zoom: number = 15;
 
   barrios: Barrio[] = [];
   barrioOrigen: Barrio[] = [];

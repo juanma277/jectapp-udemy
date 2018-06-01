@@ -28,7 +28,7 @@ export class EmpresaComponent implements OnInit {
   lng: number = 0;
   lat_update: number = 0;
   lng_update: number = 0;
-  zoom: number;
+  zoom: number = 15;
   imagenSubir: File;
   imagenTemporal1: string;
   imagenTemporal2: string;

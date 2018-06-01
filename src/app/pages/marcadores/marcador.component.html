@@ -13,6 +13,11 @@
                         </div>
 
                         <div class="form-group">
+                            <label>Descripción</label>
+                            <textarea [(ngModel)]="marcador.descripcion" name="descripcion" class="form-control" placeholder="Descripcion" required></textarea>
+                        </div>
+
+                        <div class="form-group">
                             <label>Icono</label>
                             <select [(ngModel)]="marcador.icono" name="icono" class="form-control" required>
                               <option value="">Seleccione</option>
