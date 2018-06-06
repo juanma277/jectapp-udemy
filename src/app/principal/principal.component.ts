@@ -144,7 +144,15 @@ export class PrincipalComponent implements OnInit {
       let arreglo = [];
       let dataRutas = [];
       for(let data of resp){
-          arreglo.push({nombre:data.nombre,lat_origen:data.lat_origen, lng_origen:data.lng_origen, lat_destino:data.lat_destino, empresa:data.empresa.nombre, lng_destino:data.lng_destino, barrios:(data.barrios.split(","))});
+          arreglo.push({
+                    nombre:data.nombre,
+                    lat_origen:data.lat_origen, 
+                    lng_origen:data.lng_origen, 
+                    lat_destino:data.lat_destino, 
+                    empresa:data.empresa.nombre, 
+                    lng_destino:data.lng_destino, 
+                    barrios:(data.barrios.split(","))
+                  });
       }
 
       for (let ruta = 0; ruta < arreglo.length; ruta++) {
