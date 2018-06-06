@@ -3,7 +3,7 @@
         <nav class="navbar top-navbar navbar-expand-md navbar-light">
             <div class="navbar-header">
 
-                <a class="navbar-brand pointer" routerLink="inicio">
+                <a class="navbar-brand pointer" routerLink="/inicio">
                     <b>
                             <img src="../assets/images/logo-ject-app.png" alt="homepage" class="dark-logo" />
                             <img src="../assets/images/text-ject-app.png" alt="homepage" class="light-logo" />
@@ -196,9 +196,12 @@
 
                         <div *ngIf="totalRutas > 0">
                             <h5 class="text-center"><strong>Rutas disponibles</strong> <span class="label label-success">{{totalRutas}}</span></h5>
-                            <a (click)="mostrarRuta(ruta.lat_origen, ruta.lng_origen, ruta.lat_destino, ruta.lng_destino)" *ngFor="let ruta of rutas" class="pointer">
-                                <h6>{{ruta.nombre}}</h6><span class="badge badge-warning">{{ruta.empresa.nombre}}</span>
+                            <a (click)="mostrarRuta(ruta.lat_origen, ruta.lng_origen, ruta.lat_destino, ruta.lng_destino)" 
+                                *ngFor="let ruta of rutasFinal" class="pointer">
+                                <h6>{{ruta.nombre}}</h6><span class="badge badge-warning">{{ruta.empresa}}</span>
+                                
                             </a>
+
                         </div>
 
                     </li>

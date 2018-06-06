@@ -44,7 +44,6 @@ export class BarriosService {
                });    
   }
 
-
   buscarCoordenadasDestino(nombre:string){   
     const url = URL_SERVICIOS + '/barrio/' + nombre ;
     return this.http.get(url)

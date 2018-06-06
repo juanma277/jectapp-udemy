@@ -6,6 +6,8 @@ import { Ruta } from '../../models/ruta.model';
 
 @Injectable()
 export class RutaService {
+
+  nombresBarrios= new Object();;
  
   constructor(public http: HttpClient,
               public usuarioService: UsuarioService) { }
@@ -26,6 +28,13 @@ export class RutaService {
                .map((resp:any) => resp.ruta);
   }
 
+  buscarRutasPorBarrio(origen:string, destino:string){
+    let url = URL_SERVICIOS + '/ruta/All';
+    return this.http.get(url).map((resp:any)=>{
+      return resp.rutas;
+    });
+  }
+
   borrarRuta(id: string){
     let url = URL_SERVICIOS + '/ruta/'+id;
     url += '?token=' + this.usuarioService.token;
@@ -34,15 +43,16 @@ export class RutaService {
                .map(resp => swal('Ruta Eliminada', 'Ruta elimada correctamente', 'success'));
   }
 
-  guardarRuta(ruta: Ruta){
+  guardarRuta(ruta: Ruta, barrios){
     let url = URL_SERVICIOS + '/ruta'; 
-  
+
+     
     if (ruta._id){
       //Actualizando
       url += '/' +ruta._id;
       url += '?token=' + this.usuarioService.token;     
 
-      return this.http.put(url, ruta)
+      return this.http.put(url, {nombre: ruta.nombre, empresa:ruta.empresa, barrios:barrios})
                 .map((resp:any) => {
                   swal('Ruta actualizada', 'La ruta '+ruta.nombre+' ha sido actualizada.', 'success');
                   return resp.ruta;          

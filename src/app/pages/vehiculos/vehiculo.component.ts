@@ -37,7 +37,7 @@ export class VehiculoComponent implements OnInit {
               }
 
   ngOnInit() {
-    this.rutaService.cargarRutas()
+    this.rutaService.cargarRutasAll()
         .subscribe((resp:any)=>{
           this.rutas = resp.rutas;
         });

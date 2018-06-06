@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     init_plugins();
-    this.googleInit();
+    //this.googleInit();
 
     this.email = localStorage.getItem('email') || '';
     if ( this.email.length > 1){
@@ -32,6 +32,7 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  /*
   googleInit(){
     gapi.load('auth2', ()=>{
       this.auth2 = gapi.auth2.init({
@@ -48,17 +49,17 @@ export class LoginComponent implements OnInit {
   attachSignin(element){
     this.auth2.attachClickHandler(element, {}, (googleUser) =>{
       
-      /*Datos del usuario*/
+      //Datos del usuario
       const profile = googleUser.getBasicProfile();
 
-      /*Token del usuario*/
+      //Token del usuario
       const token = googleUser.getAuthResponse().id_token;
 
       this.usuarioService.loginGoogle(token)
           .subscribe(()=> window.location.href = '#/dashboard');
     });
 
-  }
+  }*/
 
   ingresar(forma: NgForm) {
    

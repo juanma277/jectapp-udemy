@@ -43,13 +43,14 @@ export class RutaComponent implements OnInit {
   lat_destino:number;
   lng_destino:number;
   styleArray: any;
-  rutaBaariosArray: Array<String> = [];
+  rutaBaariosArray: Array<string> = [];
   barriosArray: Barrio[] = [];
   barriosList: Barrio[] = [];  
   barriosArrayNew: Barrio[] = [];
   nombresBarrios: Array<any> = [];
   checked: any[] =[];
   arraySelects = new Object();
+  BarriosFinal: Array<String> = [];
   
   adicion:boolean = false;
   
@@ -76,6 +77,7 @@ export class RutaComponent implements OnInit {
                     this.cargarRuta(id);
                     this.textoAccion = 'editar los datos de la Ruta';
                   }else{
+                    this.adicion = true;
                     this.barrioService.cargarBarrios()
                       .subscribe((resp:any)=>{
                         this.barriosArray = resp;
@@ -116,9 +118,8 @@ export class RutaComponent implements OnInit {
           this.ruta = ruta;
           this.ruta.empresa = ruta.empresa._id;
           this.ruta.barrios = ruta.barrios;
-          JSON.stringify(this.ruta.barrios);
+          //JSON.stringify(this.ruta.barrios);
           this.rutaBaariosArray = ((ruta.barrios).split(","));
-          console.log(this.rutaBaariosArray);
           this.lat_origen = ruta.lat_origen;
           this.lng_origen = ruta.lng_origen;
           this.lat_destino = ruta.lat_destino;
@@ -129,7 +130,7 @@ export class RutaComponent implements OnInit {
                 this.barrios =resp;
                 for(let data1 of this.barrios){
                   let bandera = 0;
-                  for(let data2 of this.rutaBaariosArray){ 
+                  for(let data2 of this.rutaBaariosArray){
                       if(data1.nombre === data2){
                         const barrio = new Barrio (data1.nombre, data1.lat, data1.lng, data1._id, true);
                         this.barriosArray.push(barrio);
@@ -166,18 +167,12 @@ export class RutaComponent implements OnInit {
   guardarRuta(forma: NgForm){
 
     let arrayBarrioFinal = new Object();
-    let arrayBarrioInicial = new Object();
-
-    for (let dato of this.rutaBaariosArray){
-      arrayBarrioInicial[dato] = true;
-    }
-
-    for (var y = 0; y < this.rutaBaariosArray.length; y++){
-      for(var clave in this.arraySelects) {
-        if(this.rutaBaariosArray[y] != clave){
-          let letra = this.rutaBaariosArray[y];
-          arrayBarrioFinal[letra] = true;
-        }
+    
+    for(let inicial of this.rutaBaariosArray) {
+      if (typeof this.arraySelects[inicial] == 'undefined') {
+        arrayBarrioFinal[inicial] = true;
+      } else if (this.arraySelects[inicial] == true) {
+        arrayBarrioFinal[inicial] = true;
       }
     }
 
@@ -186,21 +181,21 @@ export class RutaComponent implements OnInit {
         arrayBarrioFinal[clave] = this.arraySelects[clave];
       }
     }
-    console.log(arrayBarrioFinal);
-    /*if(forma.invalid){
-      return;
+
+    for (let clave in arrayBarrioFinal) {
+      this.BarriosFinal.push(clave);      
     }
 
-    this.rutaService.guardarRuta(this.ruta)
-        .subscribe(ruta=>{
-          this.ruta._id = ruta._id;
-          this.router.navigate(['/ruta', ruta._id]);
-        });*/
+    this.rutaService.guardarRuta(this.ruta, this.BarriosFinal)
+      .subscribe(ruta=>{
+        this.ruta._id = ruta._id;
+        this.router.navigate(['/rutas']);
+      });
     
   }
 
   updateList($event) {
-    //const barrio = new Barrio ($event.path[0].id, null, null, null, $event.srcElement.checked);
+
     if (this.checked.length == 0) {
       this.arraySelects[$event.path[0].id] = $event.srcElement.checked;
     } else {
@@ -210,7 +205,7 @@ export class RutaComponent implements OnInit {
         }
       }
     }
-    //console.log(this.arraySelects);   
+
   }
 
   cambiarFoto(){

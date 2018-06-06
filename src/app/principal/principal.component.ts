@@ -37,6 +37,7 @@ export class PrincipalComponent implements OnInit {
   marcadores: Marcador[] = [];
 
   rutas: Ruta[] = [];
+  rutasFinal:any[] = [];
   totalRegistros: number = 0;
   totalRutas: number = 0;
   cargando: boolean = false;
@@ -93,7 +94,6 @@ export class PrincipalComponent implements OnInit {
           this.totalRegistros = this.barriosService.totalBarrios;
           let barrioPrueba;
           for (let barrio of barrios ){
-            //barrioPrueba = barrio.nombre + '*' + barrio.lat + '*' + barrio.lng;
             this.barrios.push(barrio.nombre); 
           }
         });
@@ -111,6 +111,8 @@ export class PrincipalComponent implements OnInit {
   }  
 
   buscarRutas(forma: NgForm) {
+
+    this.rutasFinal = [];
      
     if( forma.value.origen === null || forma.value.destino === null ){
       swal('Error', 'Debes ingresar un origen y destino', 'warning');
@@ -135,8 +137,64 @@ export class PrincipalComponent implements OnInit {
     this.mostrarRutas = false;
     this.zoom = 15;
     this.show = false;
-    
 
+    
+    this.rutasService.buscarRutasPorBarrio(origen, destino)
+        .subscribe((resp)=>{
+      let arreglo = [];
+      let dataRutas = [];
+      for(let data of resp){
+          arreglo.push({nombre:data.nombre,lat_origen:data.lat_origen, lng_origen:data.lng_origen, lat_destino:data.lat_destino, empresa:data.empresa.nombre, lng_destino:data.lng_destino, barrios:(data.barrios.split(","))});
+      }
+
+      for (let ruta = 0; ruta < arreglo.length; ruta++) {
+        var bandera = 0;
+        for (let colecto = 0; colecto < arreglo[ruta].barrios.length; colecto++) {
+          if(origen == arreglo[ruta].barrios[colecto] || destino == arreglo[ruta].barrios[colecto]){
+            bandera = bandera + 1;
+          }
+        }
+        if (bandera == 2) {
+
+         dataRutas.push({
+                      ruta:arreglo[ruta].nombre, 
+                      lat_origen:arreglo[ruta].lat_origen, 
+                      lng_origen:arreglo[ruta].lng_origen, 
+                      lat_destino:arreglo[ruta].lat_destino,
+                      lng_destino:arreglo[ruta].lng_destino,
+                      empresa:arreglo[ruta].empresa
+                    });
+        }
+      }
+
+      
+      if(dataRutas.length === 0) {
+        this.cargando = false;
+        swal('Advertencia', 'No se encontraron rutas con los filtros ingresados', 'warning');
+        return;
+      }
+
+      for(let data of dataRutas){
+        this.rutasFinal.push({
+          'nombre': data.ruta,
+          'empresa': data.empresa,
+          'lat_origen':data.lat_origen, 
+          'lng_origen':data.lng_origen, 
+          'lat_destino':data.lat_destino,
+          'lng_destino':data.lng_destino
+        });
+    }
+
+
+      this.totalRutas = dataRutas.length;
+      this.cargando = false;
+      dataRutas = [];
+      
+    });
+
+    
+    
+    /*
     this.barriosService.buscarCoordenadasOrigen(origen)
         .subscribe(()=>{
 
@@ -182,7 +240,7 @@ export class PrincipalComponent implements OnInit {
 
               });
           
-        });
+        });*/
   }
 
   mostrarRuta(lat_origen: number, lng_origen: number, lat_destino: number, lng_destino: number){
