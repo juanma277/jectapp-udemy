@@ -201,6 +201,17 @@ export class UsuarioService {
                });
    }
 
+
+   cambiarPassword(id:string, password:string){
+    let url = URL_SERVICIOS + '/usuario/password/reset/' + id;
+    url += '?token=' + this.token;
+    return this.http.post(url, {'password':password })
+               .map(resp =>{
+                 swal('Usuario actualizado','La contraseña del usuario ha sido actualizada', 'success');
+                 return true;
+               });
+   }
+
    borrarUsuario(id:string){
      let url = URL_SERVICIOS + '/usuario/' + id;
      url += '?token=' + this.token;

@@ -71,6 +71,7 @@ export class PrincipalComponent implements OnInit {
 
   ngOnInit() {
     init_plugins();
+    this.setCurrentPosition();
     this.initializeForm();
     this.cargarBarrios();
   }

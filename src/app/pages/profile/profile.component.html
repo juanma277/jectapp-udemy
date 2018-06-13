@@ -50,7 +50,37 @@
 
             </div>
         </div>
+
+
+        <div class="card">
+            <div class="card-body" align="center">
+                <h4 class="card-title">Contraseña</h4>
+                <h6 class="card-subtitle">Espacio para editar la contraseña</h6>
+
+                <form ngNativeValidate [formGroup]="forma" (ngSubmit)="cambiarPassword()" class="form-horizontal form-material" id="loginform">
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <input formControlName="password" name="password" class="form-control" type="password" required placeholder="Contraseña">
+                        </div>
+                    </div>
+                    <div class="form-group" *ngIf="forma.errors?.sonIguales && !forma.pristine">
+                        <p class="text-danger">Las contraseñas no coinciden!</p>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <input formControlName="password2" name="password2" class="form-control" type="password" required placeholder="Confirma Contraseña">
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-success waves-effect waves-light m-r-10" type="submit">
+                        <i class="fa fa-save"></i>
+                          CAMBIAR CONTRASEÑA
+                    </button>
+                </form>
+            </div>
+        </div>
     </div>
+
+    
 
 
 </div>
