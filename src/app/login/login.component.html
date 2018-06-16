@@ -22,7 +22,8 @@
                             <input [(ngModel)]="recuerdame" name="recuerdame" id="checkbox-signup" type="checkbox" class="filled-in chk-col-light-blue">
                             <label for="checkbox-signup"> Recordarme </label>
                         </div>
-                        <a href="javascript:void(0)" id="to-recover" class="text-dark pull-right"><i class="fa fa-lock m-r-5"></i> ¿Olvido contraseña?</a> </div>
+                        <a [routerLink]="" (click)="recuperar()" class="text-dark pull-right pointer"><i class="fa fa-lock m-r-5"></i> ¿Olvido contraseña?</a> 
+                    </div>
                 </div>
                 <div class="form-group text-center m-t-20">
                     <div class="col-xs-12">
@@ -53,26 +54,41 @@
                 </div>
 
             </form>
-            <form class="form-horizontal" id="recoverform" action="index.html">
-                <div class="form-group ">
-                    <div class="col-xs-12">
-                        <h3>Recover Password</h3>
-                        <p class="text-muted">Enter your Email and instructions will be sent to you! </p>
-                    </div>
-                </div>
-                <div class="form-group ">
-                    <div class="col-xs-12">
-                        <input class="form-control" type="text" required="" placeholder="Email">
-                    </div>
-                </div>
-                <div class="form-group text-center m-t-20">
-                    <div class="col-xs-12">
-                        <button class="btn btn-primary btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">Reset</button>
-                    </div>
-                </div>
-            </form>
+           
+           
         </div>
     </div>
+
+    <!--FORMULARIO RECUPERAR CONTRASEÑA-->
+    <div class="col-md-6 position" *ngIf="recuperarPassword">
+            <div class="card card-outline-danger">
+                <div class="card-header">
+                    <h4 class="m-b-0">Recuperar Contraseña <a [routerLink]="" (click)="recuperar()" class="text-dark pull-right pointer" ><i class="fa fa-close m-r-5"></i></a></h4></div>
+                <div class="card-body">
+                    
+                        <form ngNativeValidate #f="ngForm" class="form-horizontal form-material" (ngSubmit)="recuperarPass(f)">
+                                <div class="form-group ">
+                                    <div class="col-xs-12">
+                                        <p class="text-muted">Por favor ingresa el email registrado. </p>
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <div class="col-xs-12">
+                                        <input [ngModel]="email" name="email" class="form-control" type="email" required placeholder="Email">
+                                    </div>
+                                </div>
+                                <div class="form-group text-center m-t-20">
+                                    <div class="col-xs-12">
+                                        <button class="btn btn-info text-uppercase waves-effect waves-light" type="submit">ENVIAR</button>
+                                    </div>
+                                </div>
+                        </form>
+    
+                </div>
+            </div>
+    </div>
+    <!--FIN FORMULARIO RECUPERAR CONTRASEÑA-->
+                          
 </section>
 <!-- ============================================================== -->
 <!-- End Wrapper -->

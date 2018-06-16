@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
 
   recuerdame: boolean = false;
   email: string;
+  recuperarPassword: boolean = false;
 
   auth2:any;
 
@@ -71,6 +72,24 @@ export class LoginComponent implements OnInit {
 
     this.usuarioService.login(usuario, forma.value.recuerdame)
         .subscribe(resp => this.router.navigate(['/dashboard']));
+  }
+
+  recuperar(){
+    if(this.recuperarPassword){
+      this.recuperarPassword = false;
+      return;
+    }else{
+      this.recuperarPassword = true;
+      return;
+    }
+  }
+
+  recuperarPass(forma: NgForm){
+    if( forma.invalid ){
+      return;
+    }
+
+    console.log(forma.value.email);
   }
 
 }
