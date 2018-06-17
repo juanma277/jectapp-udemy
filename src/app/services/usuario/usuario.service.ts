@@ -109,10 +109,8 @@ export class UsuarioService {
                     return true;
                   })
                   .catch(err =>{
-
-                    swal ('Error', err.error.mensaje, 'error');
+                    swal ('Error', 'Datos Incorrectos', 'error');
                     return Observable.throw(err);
-
                   });
    }
 
@@ -145,7 +143,7 @@ export class UsuarioService {
                   this.guardarStorage(usuarioDB._id, this.token,  usuarioDB, this.menu);
                 }
               
-                 swal("Usuario Actualizado!", usuario.nombre, "success");
+                 swal('Usuario Actualizado!', usuario.nombre, 'success');
 
                  return true;
                })
@@ -210,6 +208,12 @@ export class UsuarioService {
                  swal('Usuario actualizado','La contraseña del usuario ha sido actualizada', 'success');
                  return true;
                });
+   }
+
+   recordarPassword(email:string){
+     let url = URL_SERVICIOS + '/usuario/password/recordar/'+email;
+     return this.http.get(url);
+
    }
 
    borrarUsuario(id:string){
