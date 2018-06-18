@@ -23,9 +23,8 @@ import { AgmCoreModule } from '@agm/core';
 import { TypeaheadModule } from 'ngx-bootstrap';
 import { PipesModule } from './pipes/pipes.module';
 import { AgmDirectionModule } from 'agm-direction';
+import { RecordarComponent } from './password/recordar.component';
 //import { TypeaheadModule } from 'ngx-type-ahead';
-
-
 
 @NgModule({
   declarations: [
@@ -33,7 +32,8 @@ import { AgmDirectionModule } from 'agm-direction';
     LoginComponent,
     RegisterComponent,
     PagesComponent,
-    PrincipalComponent
+    PrincipalComponent,
+    RecordarComponent
   ],
   imports: [
     BrowserModule,

@@ -91,12 +91,10 @@ export class LoginComponent implements OnInit {
 
     this.usuarioService.recordarPassword(forma.value.email).subscribe(resp => {
       swal('Correcto', 'Se enviaron instrucciones al email: ' + forma.value.email, 'warning');
-      console.log(resp);
       this.recuperarPassword = false;
       return;
     }, error =>{
-      swal('Advertencia', 'el email ingresado no esta registrado', 'warning');
-      console.log(error);
+      swal('Advertencia', 'El email ingresado no esta registrado', 'warning');
       this.recuperarPassword = false;
       return;
     });

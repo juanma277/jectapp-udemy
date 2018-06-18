@@ -6,12 +6,14 @@ import { NopagefoundComponent } from './shared/nopagefound/nopagefound.component
 import { RegisterComponent } from './login/register.component';
 import { LoginGuardGuard } from './services/service.index';
 import { PrincipalComponent } from './principal/principal.component';
+import { RecordarComponent } from './password/recordar.component';
 
 
 const appRoutes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
-    { path: 'inicio', component: PrincipalComponent },    
+    { path: 'inicio', component: PrincipalComponent },
+    { path: 'recover/:id', component: RecordarComponent },    
     {
         path: '',
         component: PagesComponent,

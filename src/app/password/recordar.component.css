@@ -1,0 +1,94 @@
+/*
+Template Name: Admin pro Admin
+Author: Wrappixel
+Email: niravjoshi87@gmail.com
+File: scss
+*/
+
+
+/*
+Template Name: Admin Pro Admin
+Author: Wrappixel
+Email: niravjoshi87@gmail.com
+File: scss
+*/
+
+
+/*Theme Colors*/
+
+
+/*bootstrap Color*/
+
+
+/*Light colors*/
+
+
+/*Normal Color*/
+
+
+/*Extra Variable*/
+
+
+/*******************
+Login register and recover password Page
+******************/
+
+.login-register {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: 100%;
+    width: 100%;
+    padding: 10% 0;
+    position: fixed;
+}
+
+.login-box {
+    width: 400px;
+    margin: 0 auto;
+}
+
+.login-box .footer {
+    width: 100%;
+    left: 0px;
+    right: 0px;
+}
+
+.login-box .social {
+    display: block;
+    margin-bottom: 30px;
+}
+
+#recoverform {
+    display: none;
+}
+
+.login-sidebar {
+    padding: 0px;
+    margin-top: 0px;
+}
+
+.login-sidebar .login-box {
+    right: 0px;
+    position: absolute;
+    height: 100%;
+}
+
+.position{
+    position: absolute;
+    /*nos posicionamos en el centro del navegador*/
+    top:50%;
+    left:50%;
+    /*determinamos una anchura*/
+    width:400px;
+    /*indicamos que el margen izquierdo, es la mitad de la anchura*/
+    margin-left:-200px;
+    /*determinamos una altura*/
+    height:300px;
+    /*indicamos que el margen superior, es la mitad de la altura*/
+    margin-top:-150px;
+    border:1px solid #808080;
+    border-radius: 5%;
+    padding:5px;
+    background-color: transparent;
+}
